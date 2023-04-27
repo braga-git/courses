@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    main {
+        width: 80vw;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+
+        border: 1px solid black;
+    }
+
+    .title {
+        padding: 20px 30px;
+        border: 1px black;
+        border-style: hidden hidden solid hidden;
+
+        h1 {
+            font-size: 35px;
+            font-weight: 600;
+        }
+    }
+
+    .container {
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+
+        .menu {
+            height: 100%;
+            width: 40%;
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+
+            button {
+                background-color: #f9f9f9;
+                border: 1px solid rgb(0, 0, 0);
+
+                width: 100%;
+                height: fit-content;
+                padding: 15px;
+                margin-bottom: 15px;
+
+                font-size: 16px;
+                font-weight: 700;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: #0050ff;
+                    color: white;
+                    transition: 0.3s;
+                }
+            }
+        }
+
+        .list {
+            border: 1px black;
+            border-style: hidden hidden hidden solid;
+
+            width: 60%;
+            height: 100%;
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: baseline;
+            overflow-y: scroll;
+
+            .courseCard {
+                background-color: #f9f9f9;
+                min-height: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                border: 1px solid black;
+                padding: 15px;
+                margin-bottom: 15px;
+
+                .courseName {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+
+                .courseDescription {
+                    font-size: 14px;
+                }
+
+                .courseSubject {
+                    font-size: 12px;
+                    font-weight: 700;
+                }
+
+                .coursePrice {
+                    font-weight: 600;
+                }
+            }
+
+            label{
+                margin-bottom: 5px;
+            }
+
+            input, select{
+                margin-bottom: 25px;
+
+                background-color: #f9f9f9;
+                border: 1px solid black;
+                padding: 15px;
+            }
+
+            input:focus{
+                outline: none;       
+            }
+        }
+    }
+}
