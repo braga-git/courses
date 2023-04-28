@@ -23,93 +23,81 @@ app.createCourseSubject("Concursos")
 app.createCourseSubject("Prática e atualização")
 app.createCourseSubject("Plano OAB")
 
-console.log(app.getTeachers())
+
+const coursesListBtn = document.getElementById('coursesListBtn')
+const usersListBtn = document.getElementById('usersListBtn')
+const display = document.getElementById('display')
+const welcomeMessage = document.getElementById('welcomeMessage')
+const coursesArea = document.getElementById('coursesArea')
+const createCourseBtn = document.getElementById('createCourseBtn')
+const coursesList = document.getElementById('coursesList')
+const createCourseForm = document.getElementById('createCourseForm')
+const courseNameInput = document.getElementById('courseNameInput').value
+const courseDescriptionTextarea = document.getElementById('courseDescriptionTextarea').value
+const courseSubjectSelect = document.getElementById('courseSubjectSelect')
+const coursePriceInput = document.getElementById('coursePriceInput').value
+const courseTeachersSelect = document.getElementById('courseTeachersSelect')
+const createCourseSubmitBtn = document.getElementById('createCourseSubmitBtn')
+const teachers = []
 
 
-const list = document.querySelector('.list')
-const courses = app.getCourses()
+function createCourseCardParagraph(className, textContent){
+    const paragraph = document.createElement('p')
+    paragraph.className = className
+    paragraph.textContent = textContent
+    return paragraph
+}
+function appendOptionToSelectList(array, select){
+    array.forEach((value) => {
+        const option = document.createElement('option')
+        option.value = value
+        option.text = value
+        select.appendChild(option)
+    })
+}
 
-courses.forEach((course) => {
+
+app.getCourses().forEach((course) => {
     const courseCard = document.createElement('div')
     courseCard.className = "courseCard"
     
-    const courseName = document.createElement('p')
-    courseName.textContent = course.name
-    courseName.className = "courseName"
-    
-    const courseDescription = document.createElement('p')
-    courseDescription.textContent = course.description
-    courseDescription.className = "courseDescription"
-    
-    const courseSubject = document.createElement('p')
-    courseSubject.textContent = course.subject
-    courseSubject.className = "courseSubject"
-    
-    const coursePrice = document.createElement('p')
-    coursePrice.textContent = `R$${course.price}`
-    coursePrice.className = "coursePrice"
-    
+    const courseName = createCourseCardParagraph("courseName", course.name)
+    const courseDescription = createCourseCardParagraph("courseDescription", course.description) 
+    const courseSubject = createCourseCardParagraph("courseSubject", course.subject)
+    const coursePrice = createCourseCardParagraph("coursePrice", `R$${course.price}`)
+
     courseCard.append(courseSubject, courseName, courseDescription, coursePrice)
-    list.appendChild(courseCard)
+    coursesList.appendChild(courseCard)
+})
+app.getTeachers().forEach((teacher) => {
+    const teacherName = teacher.name
+    teachers.push(teacherName)
+})
+appendOptionToSelectList(teachers, courseTeachersSelect)
+appendOptionToSelectList(app.getCoursesSubjects(), courseSubjectSelect)
+
+
+coursesListBtn.addEventListener('click', () => {
+    welcomeMessage.style.display = "none"
+    coursesArea.style.display = "block"
+    display.style.overflowY = "scroll"
+
+    if(createCourseForm.style.display = "flex"){
+        createCourseForm.style.display = "none"
+    }
 })
 
-function createLabel(id, textContent){
-    const label = document.createElement('label')
-    label.id = id
-    label.textContent = textContent
-    return label
-}
-
-function createInput(id, type){
-    const input = document.createElement('input')
-    input.id = id
-    input.type = type
-    return input
-}
-
-function createSelectList(array){
-    const selectList = document.createElement('select')
-    array.forEach((subject) => {
-        const option = document.createElement('option')
-        option.value = subject
-        option.text = subject
-        selectList.appendChild(option)
-    })
-    return selectList
-}
-
-
-const createCourseBtn = document.getElementById('createCourseBtn')
 createCourseBtn.addEventListener('click', () => {
-    createCourseBtn.disabled = true
-
-    const courseCardList = document.querySelectorAll('.courseCard')
-    courseCardList.forEach((courseCard) => {
-        courseCard.style.display = 'none'
-    })
-
-    const courseNameLabel = createLabel("courseNameLabel", "Enter the course name")
-    const courseNameInput = createInput("courseNameInput", "text")
-    
-    const courseDescriptionLabel = createLabel("courseDescriptionLabel", "Enter the course description")
-    const courseDescriptionInput = createInput("courseDescriptionInput", "text")
-    
-    const courseSubjectLabel = createLabel("courseDescriptionLabel", "Select the course subject")
-    const coursesSubjects = createSelectList(app.getCoursesSubjects())
-
-    const coursePriceLabel = createLabel("coursePriceLabel", "Enter the course price")
-    const coursePriceInput = createInput("coursePriceInput", "number")
-
-    const courseTeachersLabel = createLabel("courseTeachersLabel", "Select the teachers for the course")
-    const teachers = []
-    app.getTeachers().forEach((object) => {
-        const teacherName = object.name
-        teachers.push(teacherName)
-    })
-
-    const courseTeachers = createSelectList(teachers)
-
-    list.append(courseNameLabel, courseNameInput, courseDescriptionLabel, courseDescriptionInput, courseSubjectLabel, coursesSubjects, coursePriceLabel, coursePriceInput, courseTeachersLabel, courseTeachers)
-
-    
+    coursesArea.style.display = "none"
+    createCourseForm.style.display = "flex"
 })
+
+
+createCourseSubmitBtn.onsubmit = () => {
+    const courseName = courseNameInput
+    const courseDescription = courseDescriptionTextarea
+    const courseSubject = courseSubjectSelect
+    const coursePrice = coursePriceInput
+    app.createCourse(courseName, courseDescription, courseSubject, coursePrice)
+    return console.log(app.getCourses())
+}

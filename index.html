@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,24 +14,56 @@
     <script src="https://kit.fontawesome.com/7e1daf944b.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
-    <main>
-        <div class="title">
-            <h1><i class="fa-solid fa-play fa-sm" style="color: #0050ff;"></i>  COURSES</h1>
-        </div>
-        <div class="container">
-            <div class="menu" id="menu">
-                <button id="createCourseBtn">
-                    Create Course
-                </button>
-                <button id="createCourseBtn">
-                    Create User
-                </button>
-            </div>
-            <div class="list" id="courseList">
 
+<body>
+    <div id="container">
+        <div id="title">
+            <h1><i class="fa-solid fa-play fa-sm" style="color: #0050ff;"></i> COURSES</h1>
+        </div>
+
+        <div id="content">
+            <div id="menu">
+                <button id="coursesListBtn">Courses list</button>
+                <button id="usersListBtn">Users list</button>
+            </div>
+            <div id="display">
+
+                <div id="welcomeMessage">
+                    <i class="fa-regular fa-face-smile-wink fa-10x"></i>
+                    <h1>Welcome to my course platform!</h1>
+                    <p>Here you will not only be able to see a list of courses and create as many others you want, but
+                        also manage the teachers and students of each course.</p>
+                    <span>Enjoy as much as I did when coding it!</span>
+                    <small>This is a website made for coding practice.</small>
+                </div>
+
+                <div id="coursesArea">
+                    <button id="createCourseBtn">Create course</button>
+                    <div id="coursesList"></div>
+                </div>
+
+                <form id="createCourseForm">
+                    <label for="courseNameInput">Enter the course name</label>
+                    <input type="text" name="courseName" id="courseNameInput">
+
+                    <label for="courseDescriptionTextarea">Enter the course description</label>
+                    <textarea type="text" name="courseDescription" id="courseDescriptionTextarea"></textarea>
+
+                    <label for="courseSubjectSelect">Select the course subject</label>
+                    <select name="courseSubject" id="courseSubjectSelect"></select>
+
+                    <label for="coursePriceInput">Enter the course price</label>
+                    <input type="number" name="coursePrice" id="coursePriceInput">
+
+                    <label for="courseTeachersSelect">Select the teachers for the course</label>
+                    <select name="courseTeachers" id="courseTeachersSelect"></select>
+
+                    <button type="submit" id="createCourseSubmitBtn">Create course</button>
+                </form>
             </div>
         </div>
-    </main>
+
+    </div>
 </body>
+
 </html>

@@ -14,16 +14,16 @@ body {
     align-items: center;
 
 
-    main {
-        width: 80vw;
-        height: 80vh;
+    #container {
+        width: 800px;
+        height: 700px;
         display: flex;
         flex-direction: column;
 
         border: 1px solid black;
     }
 
-    .title {
+    #title {
         padding: 20px 30px;
         border: 1px black;
         border-style: hidden hidden solid hidden;
@@ -34,97 +34,165 @@ body {
         }
     }
 
-    .container {
+    #content {
         display: flex;
         height: 100%;
         overflow: hidden;
 
-        .menu {
-            height: 100%;
-            width: 40%;
-            padding: 30px;
+        button {
+            background-color: #f9f9f9;
+            border: 1px solid rgb(0, 0, 0);
 
-            display: flex;
-            flex-direction: column;
+            width: 100%;
+            height: fit-content;
+            padding: 15px;
 
-            button {
-                background-color: #f9f9f9;
-                border: 1px solid rgb(0, 0, 0);
+            font-size: 16px;
+            font-weight: 700;
 
-                width: 100%;
-                height: fit-content;
-                padding: 15px;
-                margin-bottom: 15px;
-
-                font-size: 16px;
-                font-weight: 700;
-
-                &:hover {
-                    cursor: pointer;
-                    background-color: #0050ff;
-                    color: white;
-                    transition: 0.3s;
-                }
+            &:hover {
+                cursor: pointer;
+                background-color: #0050ff;
+                color: white;
+                transition: 0.3s;
             }
         }
 
-        .list {
-            border: 1px black;
-            border-style: hidden hidden hidden solid;
-
-            width: 60%;
+        #menu {
+            width: 50%;
             height: 100%;
             padding: 30px;
 
             display: flex;
             flex-direction: column;
             justify-content: baseline;
-            overflow-y: scroll;
+            gap: 15px;
+        }
 
-            .courseCard {
-                background-color: #f9f9f9;
-                min-height: fit-content;
+        #display {
+            border: 1px black;
+            border-style: hidden hidden hidden solid;
+
+            width: 100%;
+            height: 100%;
+
+            overflow-y: none;
+
+            #welcomeMessage {
+                height: 100%;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                justify-content: center;
+                gap: 15px;
+                padding: 30px;
+                text-align: center;
 
-                border: 1px solid black;
-                padding: 15px;
-                margin-bottom: 15px;
-
-                .courseName {
-                    font-size: 18px;
-                    font-weight: 700;
+                i {
+                    color: #0050ff;
+                    margin-bottom: 20px;
                 }
 
-                .courseDescription {
-                    font-size: 14px;
+                h1 {
+                    font-size: 1.5rem;
                 }
 
-                .courseSubject {
-                    font-size: 12px;
-                    font-weight: 700;
-                }
-
-                .coursePrice {
+                span {
                     font-weight: 600;
+                    color: #0050ff;
+                }
+
+                small {
+                    color: #cacaca;
                 }
             }
 
-            label{
-                margin-bottom: 5px;
+            #coursesArea {
+                display: none;
+
+                border: 1px black;
+                border-style: hidden solid hidden hidden;
+
+                #createCourseBtn {
+                    border: 1px black;
+                    border-style: hidden hidden solid hidden;
+                }
+
+                #coursesList {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: baseline;
+                    gap: 15px;
+
+                    padding: 30px;
+
+                    .courseCard {
+                        background-color: #f9f9f9;
+                        min-height: fit-content;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        border: 1px solid black;
+                        padding: 15px;
+
+                        .courseName {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+
+                        .courseDescription {
+                            font-size: 14px;
+                        }
+
+                        .courseSubject {
+                            font-size: 12px;
+                            font-weight: 700;
+                        }
+
+                        .coursePrice {
+                            font-weight: 600;
+                        }
+                    }
+                }
             }
 
-            input, select{
-                margin-bottom: 25px;
+            #createCourseForm {
+                border: 1px black;
+                border-style: hidden solid hidden hidden;
+                padding: 30px;
 
-                background-color: #f9f9f9;
-                border: 1px solid black;
-                padding: 15px;
-            }
+                display: none;
+                flex-direction: column;
+                justify-content: baseline;
 
-            input:focus{
-                outline: none;       
+                label {
+                    margin-bottom: 5px;
+                }
+
+                input,
+                select,
+                textarea {
+                    margin-bottom: 25px;
+
+                    background-color: #f9f9f9;
+                    border: 1px solid black;
+                    padding: 15px;
+                }
+
+                input,
+                textarea:focus {
+                    outline: none;
+                }
+
+                #courseDescriptionTextarea {
+                    resize: none;
+                    height: 200px;
+                }
+
+                #createCourseSubmitBtn {
+                    background-color: #0050ff;
+                    color: white;
+                }
             }
         }
     }

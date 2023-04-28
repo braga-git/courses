@@ -12,62 +12,98 @@ body {
   justify-content: center;
   align-items: center;
 }
-body main {
-  width: 80vw;
-  height: 80vh;
+body #container {
+  width: 800px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   border: 1px solid black;
 }
-body .title {
+body #title {
   padding: 20px 30px;
   border: 1px black;
   border-style: hidden hidden solid hidden;
 }
-body .title h1 {
+body #title h1 {
   font-size: 35px;
   font-weight: 600;
 }
-body .container {
+body #content {
   display: flex;
   height: 100%;
   overflow: hidden;
 }
-body .container .menu {
-  height: 100%;
-  width: 40%;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-}
-body .container .menu button {
+body #content button {
   background-color: #f9f9f9;
   border: 1px solid rgb(0, 0, 0);
   width: 100%;
   height: fit-content;
   padding: 15px;
-  margin-bottom: 15px;
   font-size: 16px;
   font-weight: 700;
 }
-body .container .menu button:hover {
+body #content button:hover {
   cursor: pointer;
   background-color: #0050ff;
   color: white;
   transition: 0.3s;
 }
-body .container .list {
-  border: 1px black;
-  border-style: hidden hidden hidden solid;
-  width: 60%;
+body #content #menu {
+  width: 50%;
   height: 100%;
   padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: baseline;
-  overflow-y: scroll;
+  gap: 15px;
 }
-body .container .list .courseCard {
+body #content #display {
+  border: 1px black;
+  border-style: hidden hidden hidden solid;
+  width: 100%;
+  height: 100%;
+  overflow-y: none;
+}
+body #content #display #welcomeMessage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding: 30px;
+  text-align: center;
+}
+body #content #display #welcomeMessage i {
+  color: #0050ff;
+  margin-bottom: 20px;
+}
+body #content #display #welcomeMessage h1 {
+  font-size: 1.5rem;
+}
+body #content #display #welcomeMessage span {
+  font-weight: 600;
+  color: #0050ff;
+}
+body #content #display #welcomeMessage small {
+  color: #cacaca;
+}
+body #content #display #coursesArea {
+  display: none;
+  border: 1px black;
+  border-style: hidden solid hidden hidden;
+}
+body #content #display #coursesArea #createCourseBtn {
+  border: 1px black;
+  border-style: hidden hidden solid hidden;
+}
+body #content #display #coursesArea #coursesList {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  gap: 15px;
+  padding: 30px;
+}
+body #content #display #coursesArea #coursesList .courseCard {
   background-color: #f9f9f9;
   min-height: fit-content;
   display: flex;
@@ -75,33 +111,51 @@ body .container .list .courseCard {
   gap: 10px;
   border: 1px solid black;
   padding: 15px;
-  margin-bottom: 15px;
 }
-body .container .list .courseCard .courseName {
+body #content #display #coursesArea #coursesList .courseCard .courseName {
   font-size: 18px;
   font-weight: 700;
 }
-body .container .list .courseCard .courseDescription {
+body #content #display #coursesArea #coursesList .courseCard .courseDescription {
   font-size: 14px;
 }
-body .container .list .courseCard .courseSubject {
+body #content #display #coursesArea #coursesList .courseCard .courseSubject {
   font-size: 12px;
   font-weight: 700;
 }
-body .container .list .courseCard .coursePrice {
+body #content #display #coursesArea #coursesList .courseCard .coursePrice {
   font-weight: 600;
 }
-body .container .list label {
+body #content #display #createCourseForm {
+  border: 1px black;
+  border-style: hidden solid hidden hidden;
+  padding: 30px;
+  display: none;
+  flex-direction: column;
+  justify-content: baseline;
+}
+body #content #display #createCourseForm label {
   margin-bottom: 5px;
 }
-body .container .list input, body .container .list select {
+body #content #display #createCourseForm input,
+body #content #display #createCourseForm select,
+body #content #display #createCourseForm textarea {
   margin-bottom: 25px;
   background-color: #f9f9f9;
   border: 1px solid black;
   padding: 15px;
 }
-body .container .list input:focus {
+body #content #display #createCourseForm input,
+body #content #display #createCourseForm textarea:focus {
   outline: none;
+}
+body #content #display #createCourseForm #courseDescriptionTextarea {
+  resize: none;
+  height: 200px;
+}
+body #content #display #createCourseForm #createCourseSubmitBtn {
+  background-color: #0050ff;
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */
