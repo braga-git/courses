@@ -17,8 +17,8 @@
 
 <body>
     <div id="container">
-        <div id="title">
-            <h1><i class="fa-solid fa-play fa-sm" style="color: #0050ff;"></i> COURSES</h1>
+        <div id="header">
+            <h1 id="logo"><i class="fa-solid fa-play fa-sm" style="color: #0050ff;"></i> COURSES</h1>
         </div>
 
         <div id="content">
@@ -28,11 +28,10 @@
             </div>
             <div id="display">
 
-                <div id="welcomeMessage">
+                <div id="welcomeMessage" class="platformMessages">
                     <i class="fa-regular fa-face-smile-wink fa-10x"></i>
                     <h1>Welcome to my course platform!</h1>
-                    <p>Here you will not only be able to see a list of courses and create as many others you want, but
-                        also manage the teachers and students of each course.</p>
+                    <p>Here you will not only be able to see a list of courses and create as many others you want, but also manage the teachers and students of each course.</p>
                     <span>Enjoy as much as I did when coding it!</span>
                     <small>This is a website made for coding practice.</small>
                 </div>
@@ -43,23 +42,50 @@
                 </div>
 
                 <form id="createCourseForm">
-                    <label for="courseNameInput">Enter the course name</label>
-                    <input type="text" name="courseName" id="courseNameInput">
+                    <div class="formField">
+                        <label for="courseNameInput">Enter the course name</label>
+                        <input type="text" name="courseName" id="courseNameInput" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
 
-                    <label for="courseDescriptionTextarea">Enter the course description</label>
-                    <textarea type="text" name="courseDescription" id="courseDescriptionTextarea"></textarea>
+                    <div class="formField">
+                        <label for="courseDescriptionTextarea">Enter the course description</label>
+                        <textarea type="text" name="courseDescription" id="courseDescriptionTextarea" autocomplete="off"></textarea>
+                        <div class="error"></div>
+                    </div>
 
-                    <label for="courseSubjectSelect">Select the course subject</label>
-                    <select name="courseSubject" id="courseSubjectSelect"></select>
+                    <div class="formField">
+                        <label for="courseSubjectSelect">Select the course subject</label>
+                        <select name="courseSubject" id="courseSubjectSelect"></select>
+                        <div class="error"></div>
+                    </div>
 
-                    <label for="coursePriceInput">Enter the course price</label>
-                    <input type="number" name="coursePrice" id="coursePriceInput">
+                    <div class="formField">
+                        <label for="coursePriceInput">Define the course price</label>
+                        <input type="number" name="coursePrice" id="coursePriceInput" min="0" step="1.00" onwheel="return false" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
 
-                    <label for="courseTeachersSelect">Select the teachers for the course</label>
-                    <select name="courseTeachers" id="courseTeachersSelect"></select>
+                    <div class="formField">
+                        <label for="courseTeachersSelect">Select the teachers for the course</label>
+                        <select name="courseTeachers" id="courseTeachersSelect" multiple></select>
+                        <div class="error"></div>
+                    </div>
 
-                    <button type="submit" id="createCourseSubmitBtn">Create course</button>
+                    <button type="submit">Create course</button>
                 </form>
+
+                <div id="createCourseConfirmation" class="platformMessages">
+                    <i class="fa-regular fa-thumbs-up fa-10x"></i>
+                    <h1>Course successfully created!</h1>
+                    <p>You have just created a new course for this platform. </p>
+                    <span>Great job!</span>
+                </div>
+
+                <div id="usersArea">
+                    <div id="usersList"></div>
+                </div>
+
             </div>
         </div>
 

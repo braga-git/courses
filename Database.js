@@ -24,6 +24,7 @@ export class Database {
 
     saveUser(newUser) {
         const userExists = this.#storage.users.find(user => user.email === newUser)
+
         if (!userExists && newUser.type === 'Teacher') {
             this.#storage.users.push(newUser)
             this.#storage.teachers.push(newUser)
@@ -31,18 +32,22 @@ export class Database {
             this.#storage.users.push(newUser)
             this.#storage.students.push(newUser)
         }
+
+        this.#storage.users.forEach((user) => {
+            const userId = this.#storage.users.indexOf(user)
+            newUser.id = userId
+        })
     }
 
-    findUserByEmail(userEmail) {
-        return this.#storage.users.find(user => user.email === userEmail)
+    findUserById(userId) {
+        return this.#storage.users.find(user => user.id === userId)
     }
 
-    addUserToCourse(userEmail, courseName) {
-        const user = this.findUserByEmail(userEmail)
-        const userType = user.type
+    addUserToCourse(userId, courseName) {
+        const user = this.findUserById(userId)
         const course = this.findCourseByName(courseName)
 
-        if (userType === 'Teacher') {
+        if (user?.type === 'Teacher') {
             course?.addToTeachers(user)
             user?.addToCourses(course)
         } else {

@@ -19,14 +19,18 @@ body #container {
   flex-direction: column;
   border: 1px solid black;
 }
-body #title {
+body #header {
   padding: 20px 30px;
   border: 1px black;
   border-style: hidden hidden solid hidden;
 }
-body #title h1 {
+body #header h1 {
   font-size: 35px;
   font-weight: 600;
+  width: fit-content;
+}
+body #header h1:hover {
+  cursor: pointer;
 }
 body #content {
   display: flex;
@@ -64,7 +68,7 @@ body #content #display {
   height: 100%;
   overflow-y: none;
 }
-body #content #display #welcomeMessage {
+body #content #display .platformMessages {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -73,19 +77,28 @@ body #content #display #welcomeMessage {
   padding: 30px;
   text-align: center;
 }
-body #content #display #welcomeMessage i {
+body #content #display .platformMessages i {
   color: #0050ff;
   margin-bottom: 20px;
 }
-body #content #display #welcomeMessage h1 {
+body #content #display .platformMessages h1 {
   font-size: 1.5rem;
 }
-body #content #display #welcomeMessage span {
+body #content #display .platformMessages span {
   font-weight: 600;
   color: #0050ff;
 }
-body #content #display #welcomeMessage small {
+body #content #display .platformMessages small {
   color: #cacaca;
+}
+body #content #display #usersArea .card {
+  background-color: #f9f9f9;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid black;
+  padding: 15px;
 }
 body #content #display #coursesArea {
   display: none;
@@ -133,29 +146,46 @@ body #content #display #createCourseForm {
   display: none;
   flex-direction: column;
   justify-content: baseline;
+  gap: 25px;
 }
-body #content #display #createCourseForm label {
-  margin-bottom: 5px;
+body #content #display #createCourseForm .formField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
 }
-body #content #display #createCourseForm input,
-body #content #display #createCourseForm select,
-body #content #display #createCourseForm textarea {
-  margin-bottom: 25px;
+body #content #display #createCourseForm .formField input,
+body #content #display #createCourseForm .formField select,
+body #content #display #createCourseForm .formField option,
+body #content #display #createCourseForm .formField textarea {
   background-color: #f9f9f9;
   border: 1px solid black;
   padding: 15px;
 }
-body #content #display #createCourseForm input,
-body #content #display #createCourseForm textarea:focus {
+body #content #display #createCourseForm .formField input,
+body #content #display #createCourseForm .formField textarea:focus {
   outline: none;
 }
-body #content #display #createCourseForm #courseDescriptionTextarea {
+body #content #display #createCourseForm .formField #courseDescriptionTextarea {
+  font-size: 14px;
   resize: none;
   height: 200px;
 }
-body #content #display #createCourseForm #createCourseSubmitBtn {
-  background-color: #0050ff;
-  color: white;
+body #content #display #createCourseForm .formField #courseTeachersSelect option {
+  margin: 3px;
+}
+body #content #display #createCourseForm .formField.error input, body #content #display #createCourseForm .formField.error textarea {
+  border: 2px solid red;
+}
+body #content #display #createCourseForm .formField.error .error {
+  color: red;
+  font-size: 14px;
+}
+body #content #display #createCourseForm .formField.success input, body #content #display #createCourseForm .formField.success textarea {
+  border: 2px solid green;
+}
+body #content #display #createCourseConfirmation {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

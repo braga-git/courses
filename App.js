@@ -31,8 +31,8 @@ export class App {
         return App.#database.findUserByEmail(userEmail)
     }
 
-    addUser(userEmail, courseName) {
-        App.#database.addUserToCourse(userEmail, courseName)
+    addUser(userId, courseName) {
+        App.#database.addUserToCourse(userId, courseName)
     }
 
     getTeachers() {
