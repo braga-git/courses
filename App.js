@@ -30,15 +30,23 @@ export class App {
     getAUser(userEmail) {
         return App.#database.findUserByEmail(userEmail)
     }
+    
+    getTeachers() {
+        return App.#database.find('teachers')
+    }
+    
+    createUserType(newUserType){
+        App.#database.saveUserType(newUserType)
+    }
+
+    getUsersTypes(){
+        return App.#database.find('usersTypes')
+    }
 
     addUser(userId, courseName) {
         App.#database.addUserToCourse(userId, courseName)
     }
-
-    getTeachers() {
-        return App.#database.find('teachers')
-    }
-
+    
     createCourseSubject(newCourseSubject){
         App.#database.saveCourseSubject(newCourseSubject)
     }

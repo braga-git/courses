@@ -91,7 +91,7 @@ body #content #display .platformMessages span {
 body #content #display .platformMessages small {
   color: #cacaca;
 }
-body #content #display #usersArea .card {
+body #content #display .card {
   background-color: #f9f9f9;
   min-height: fit-content;
   display: flex;
@@ -100,14 +100,12 @@ body #content #display #usersArea .card {
   border: 1px solid black;
   padding: 15px;
 }
-body #content #display #coursesArea {
-  display: none;
-  border: 1px black;
-  border-style: hidden solid hidden hidden;
-}
-body #content #display #coursesArea #createCourseBtn {
+body #content #display #createCourseBtn, body #content #display #createUserBtn {
   border: 1px black;
   border-style: hidden hidden solid hidden;
+}
+body #content #display #coursesArea {
+  display: none;
 }
 body #content #display #coursesArea #coursesList {
   display: flex;
@@ -115,15 +113,6 @@ body #content #display #coursesArea #coursesList {
   justify-content: baseline;
   gap: 15px;
   padding: 30px;
-}
-body #content #display #coursesArea #coursesList .courseCard {
-  background-color: #f9f9f9;
-  min-height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 1px solid black;
-  padding: 15px;
 }
 body #content #display #coursesArea #coursesList .courseCard .courseName {
   font-size: 18px;
@@ -139,16 +128,14 @@ body #content #display #coursesArea #coursesList .courseCard .courseSubject {
 body #content #display #coursesArea #coursesList .courseCard .coursePrice {
   font-weight: 600;
 }
-body #content #display #createCourseForm {
-  border: 1px black;
-  border-style: hidden solid hidden hidden;
+body #content #display #createCourseForm, body #content #display #createUserForm {
   padding: 30px;
   display: none;
   flex-direction: column;
   justify-content: baseline;
   gap: 25px;
 }
-body #content #display #createCourseForm .formField {
+body #content #display #createCourseForm .formField, body #content #display #createUserForm .formField {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -157,35 +144,61 @@ body #content #display #createCourseForm .formField {
 body #content #display #createCourseForm .formField input,
 body #content #display #createCourseForm .formField select,
 body #content #display #createCourseForm .formField option,
-body #content #display #createCourseForm .formField textarea {
+body #content #display #createCourseForm .formField textarea, body #content #display #createUserForm .formField input,
+body #content #display #createUserForm .formField select,
+body #content #display #createUserForm .formField option,
+body #content #display #createUserForm .formField textarea {
   background-color: #f9f9f9;
   border: 1px solid black;
   padding: 15px;
 }
 body #content #display #createCourseForm .formField input,
-body #content #display #createCourseForm .formField textarea:focus {
+body #content #display #createCourseForm .formField textarea:focus, body #content #display #createUserForm .formField input,
+body #content #display #createUserForm .formField textarea:focus {
   outline: none;
 }
-body #content #display #createCourseForm .formField #courseDescriptionTextarea {
+body #content #display #createCourseForm .formField #courseDescriptionTextarea, body #content #display #createUserForm .formField #courseDescriptionTextarea {
   font-size: 14px;
   resize: none;
   height: 200px;
 }
-body #content #display #createCourseForm .formField #courseTeachersSelect option {
+body #content #display #createCourseForm .formField #courseTeachersSelect option, body #content #display #createUserForm .formField #courseTeachersSelect option {
   margin: 3px;
 }
-body #content #display #createCourseForm .formField.error input, body #content #display #createCourseForm .formField.error textarea {
+body #content #display #createCourseForm .formField.error input,
+body #content #display #createCourseForm .formField.error textarea, body #content #display #createUserForm .formField.error input,
+body #content #display #createUserForm .formField.error textarea {
   border: 2px solid red;
 }
-body #content #display #createCourseForm .formField.error .error {
+body #content #display #createCourseForm .formField.error .error, body #content #display #createUserForm .formField.error .error {
   color: red;
   font-size: 14px;
 }
-body #content #display #createCourseForm .formField.success input, body #content #display #createCourseForm .formField.success textarea {
+body #content #display #createCourseForm .formField.success input,
+body #content #display #createCourseForm .formField.success textarea, body #content #display #createUserForm .formField.success input,
+body #content #display #createUserForm .formField.success textarea {
   border: 2px solid green;
 }
 body #content #display #createCourseConfirmation {
   display: none;
+}
+body #content #display #usersArea {
+  display: none;
+}
+body #content #display #usersArea #usersList {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  gap: 15px;
+  padding: 30px;
+}
+body #content #display #usersArea #usersList .userCard .userType {
+  font-size: 12px;
+  font-weight: 700;
+}
+body #content #display #usersArea #usersList .userCard .userName {
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /*# sourceMappingURL=style.css.map */

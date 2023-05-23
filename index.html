@@ -27,7 +27,6 @@
                 <button id="usersListBtn">Users list</button>
             </div>
             <div id="display">
-
                 <div id="welcomeMessage" class="platformMessages">
                     <i class="fa-regular fa-face-smile-wink fa-10x"></i>
                     <h1>Welcome to my course platform!</h1>
@@ -35,12 +34,10 @@
                     <span>Enjoy as much as I did when coding it!</span>
                     <small>This is a website made for coding practice.</small>
                 </div>
-
                 <div id="coursesArea">
                     <button id="createCourseBtn">Create course</button>
                     <div id="coursesList"></div>
                 </div>
-
                 <form id="createCourseForm">
                     <div class="formField">
                         <label for="courseNameInput">Enter the course name</label>
@@ -74,18 +71,56 @@
 
                     <button type="submit">Create course</button>
                 </form>
-
                 <div id="createCourseConfirmation" class="platformMessages">
                     <i class="fa-regular fa-thumbs-up fa-10x"></i>
                     <h1>Course successfully created!</h1>
                     <p>You have just created a new course for this platform. </p>
                     <span>Great job!</span>
                 </div>
-
                 <div id="usersArea">
+                    <button id="createUserBtn">Create user</button>
                     <div id="usersList"></div>
                 </div>
+                <form id="createUserForm">
 
+                    <div class="formField">
+                        <label for="userTypeSelect">Select the user type</label>
+                        <select name="userType" id="userTypeSelect"></select>
+                        <div class="error"></div>
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="userNameInput">Enter the user name</label>
+                        <input type="text" name="userName" id="userNameInput" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
+
+                    <div class="formField">
+                        <label for="userEmailInput">Enter the user email</label>
+                        <input type="email" name="userEmail" id="userEmailInput" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
+
+                    <div class="formField">
+                        <label for="userPasswordInput">Enter the user password</label>
+                        <input type="password" name="userPassword" id="userPasswordInput" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
+
+                    <div class="formField">
+                        <label for="userCPFInput">Enter the user CPF</label>
+                        <input type="text" name="userCPF" id="userCPFInput" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
+
+                    <div class="formField">
+                        <label for="userPhoneInput">Enter the user phone number</label>
+                        <input type="text" name="userPhone" id="userPhoneInput" autocomplete="off">
+                        <div class="error"></div>
+                    </div>
+
+                    <button type="submit">Create user</button>
+                </form>
             </div>
         </div>
 

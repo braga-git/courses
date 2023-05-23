@@ -4,17 +4,25 @@ export class Database {
         coursesSubjects: [],
         teachers: [],
         students: [],
-        users: []
+        users: [],
+        usersTypes: []
     }
-
+    
     find(key) {
         return this.#storage[key]
     }
-
+    
     saveCourse(newCourse) {
         const courseExists = this.#storage.courses.find(course => course.name === newCourse.name)
         if (!courseExists) {
             this.#storage.courses.push(newCourse)
+        }
+    }
+    
+    saveCourseSubject(newCourseSubject){
+        const courseSubjectExists = this.#storage.coursesSubjects.find(courseSubject => courseSubject === newCourseSubject)
+        if (!courseSubjectExists) {
+            this.#storage.coursesSubjects.push(newCourseSubject)
         }
     }
 
@@ -38,6 +46,13 @@ export class Database {
             newUser.id = userId
         })
     }
+    
+    saveUserType(newUserType){
+        const userTypeExists = this.#storage.usersTypes.find(userType => userType === newUserType)
+        if (!userTypeExists) {
+            this.#storage.usersTypes.push(newUserType)
+        }
+    }
 
     findUserById(userId) {
         return this.#storage.users.find(user => user.id === userId)
@@ -53,13 +68,6 @@ export class Database {
         } else {
             course?.addToStudents(user)
             user?.addToCourses(course)
-        }
-    }
-
-    saveCourseSubject(newCourseSubject){
-        const courseSubjectExists = this.#storage.coursesSubjects.find(courseSubject => courseSubject === newCourseSubject)
-        if (!courseSubjectExists) {
-            this.#storage.coursesSubjects.push(newCourseSubject)
         }
     }
 }

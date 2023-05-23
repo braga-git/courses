@@ -33,7 +33,7 @@ body {
             font-weight: 600;
             width: fit-content;
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
@@ -61,7 +61,7 @@ body {
                 color: white;
                 transition: 0.3s;
             }
-            
+
         }
 
         #menu {
@@ -112,30 +112,25 @@ body {
                 }
             }
 
+            .card {
+                background-color: #f9f9f9;
+                min-height: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
 
-            #usersArea{
-                .card{
-                    background-color: #f9f9f9;
-                    min-height: fit-content;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-    
-                    border: 1px solid black;
-                    padding: 15px;
-                }
+                border: 1px solid black;
+                padding: 15px;
             }
-            
+
+            #createCourseBtn, #createUserBtn {
+                border: 1px black;
+                border-style: hidden hidden solid hidden;
+            }
+
             #coursesArea {
                 display: none;
 
-                border: 1px black;
-                border-style: hidden solid hidden hidden;
-
-                #createCourseBtn {
-                    border: 1px black;
-                    border-style: hidden hidden solid hidden;
-                }
 
                 #coursesList {
                     display: flex;
@@ -146,15 +141,6 @@ body {
                     padding: 30px;
 
                     .courseCard {
-                        background-color: #f9f9f9;
-                        min-height: fit-content;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 10px;
-
-                        border: 1px solid black;
-                        padding: 15px;
-
                         .courseName {
                             font-size: 18px;
                             font-weight: 700;
@@ -176,9 +162,7 @@ body {
                 }
             }
 
-            #createCourseForm {
-                border: 1px black;
-                border-style: hidden solid hidden hidden;
+            #createCourseForm, #createUserForm {
                 padding: 30px;
 
                 display: none;
@@ -186,12 +170,12 @@ body {
                 justify-content: baseline;
                 gap: 25px;
 
-                .formField{
+                .formField {
                     display: flex;
                     flex-direction: column;
                     gap: 5px;
                     width: 100%;
-                    
+
                     input,
                     select,
                     option,
@@ -200,43 +184,73 @@ body {
                         border: 1px solid black;
                         padding: 15px;
                     }
-                    
+
                     input,
                     textarea:focus {
                         outline: none;
                     }
-                    
+
                     #courseDescriptionTextarea {
                         font-size: 14px;
                         resize: none;
                         height: 200px;
                     }
 
-                    #courseTeachersSelect{
-                        option{
+                    #courseTeachersSelect {
+                        option {
                             margin: 3px;
                         }
                     }
 
-                    &.error{
-                        input, textarea{
+                    &.error {
+
+                        input,
+                        textarea {
                             border: 2px solid red;
                         }
-                        .error{
+
+                        .error {
                             color: red;
                             font-size: 14px;
                         }
                     }
-                    &.success{
-                        input, textarea{
+
+                    &.success {
+
+                        input,
+                        textarea {
                             border: 2px solid green;
                         }
                     }
                 }
             }
 
-            #createCourseConfirmation{
+            #createCourseConfirmation {
                 display: none;
+            }
+
+            #usersArea {
+                display: none;
+
+                #usersList {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: baseline;
+                    gap: 15px;
+
+                    padding: 30px;
+
+                    .userCard{
+                        .userType{
+                            font-size: 12px;
+                            font-weight: 700;
+                        }
+                        .userName{
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+                    }
+                }
             }
         }
     }

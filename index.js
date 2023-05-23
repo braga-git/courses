@@ -8,14 +8,6 @@ app.createCourse("Carreiras Tribunais | Analista Judiciário - Área Judiciária
 app.createCourse("Advocacia Trabalhista e Compliance", "Curso especializado em Advocacia Trabalhista e Compliance, com enfoque na prática e atualização profissional para a área.", "Prática e atualização", 543.76)
 app.createCourse("Plano OAB 3.0 38º Exame", "Curso completo para aprovação nas 1ª e 2ª fases do exame da OAB, com metodologia prática e professores especializados.", "Plano OAB", 1352.65)
 
-app.createUser("Teacher", "Nidal", "nidal@courses.com.br", "penalnaveia", "213.321.340-02", "(51) 9 9534-2234")
-app.createUser("Teacher", "Cleize", "cleize@courses.com.br", "trabalhonaveia", "324.132.543-41", "(51) 9 9534-2544")
-app.createUser("Teacher", "Fetter", "fetter@courses.com.br", "civilnaveia", "865.657.765-32", "(51) 9 9534-2655")
-app.createUser("Teacher", "Douglas", "douglas@courses.com.br", "filosofianaveia", "342.456.987-65", "(51) 9 9534-2677")
-app.createUser("Teacher", "Matheus", "matheus@courses.com.br", "ambientalnaveia", "436.123.321-76", "(51) 9 9534-2987")
-
-app.createUser("Student", "Luiza", "luiza@cap.com", "senhamestra123", "123.435.443-43", "(51) 9 9214-3214")
-
 app.createCourseSubject("OAB 1ª Fase")
 app.createCourseSubject("OAB 2ª Fase")
 app.createCourseSubject("Concursos")
@@ -23,40 +15,67 @@ app.createCourseSubject("Prática e atualização")
 app.createCourseSubject("Plano OAB")
 
 
+app.createUser("Teacher", "Nidal", "nidal@courses.com.br", "penalnaveia", "213.321.340-02", "(51) 9 9534-2234")
+app.createUser("Teacher", "Cleize", "cleize@courses.com.br", "trabalhonaveia", "324.132.543-41", "(51) 9 9534-2544")
+app.createUser("Teacher", "Fetter", "fetter@courses.com.br", "civilnaveia", "865.657.765-32", "(51) 9 9534-2655")
+app.createUser("Teacher", "Douglas", "douglas@courses.com.br", "filosofianaveia", "342.456.987-65", "(51) 9 9534-2677")
+app.createUser("Teacher", "Matheus", "matheus@courses.com.br", "ambientalnaveia", "436.123.321-76", "(51) 9 9534-2987")
+app.createUser("Student", "Luiza", "luiza@cap.com", "senhamestra123", "123.435.443-43", "(51) 9 9214-3214")
+
+app.createUserType("Teacher")
+app.createUserType("Student")
+
+
 const courses = app.getCourses()
 const users = app.getUsers()
 const coursesSubjects = app.getCoursesSubjects()
+const usersTypes = app.getUsersTypes()
+
 const logo = document.getElementById('logo')
 const display = document.getElementById('display')
 const welcomeMessage = document.getElementById('welcomeMessage')
-const coursesListBtn = document.getElementById('coursesListBtn')
-const createCourseConfirmation = document.getElementById('createCourseConfirmation')
-const coursesArea = document.getElementById('coursesArea')
-const createCourseBtn = document.getElementById('createCourseBtn')
-const coursesList = document.getElementById('coursesList')
-const usersListBtn = document.getElementById('usersListBtn')
-const usersList = document.getElementById('usersList')
 
+const coursesListBtn = document.getElementById('coursesListBtn')
+const coursesArea = document.getElementById('coursesArea')
+const coursesList = document.getElementById('coursesList')
+const createCourseBtn = document.getElementById('createCourseBtn')
 const createCourseForm = document.getElementById('createCourseForm')
 const courseNameInput = document.getElementById('courseNameInput')
 const courseDescriptionTextarea = document.getElementById('courseDescriptionTextarea')
 const courseSubjectSelect = document.getElementById('courseSubjectSelect')
 const coursePriceInput = document.getElementById('coursePriceInput')
 const courseTeachersSelect = document.getElementById('courseTeachersSelect')
+const createCourseConfirmation = document.getElementById('createCourseConfirmation')
 
+const usersListBtn = document.getElementById('usersListBtn')
+const usersArea = document.getElementById('usersArea')
+const usersList = document.getElementById('usersList')
+const createUserBtn = document.getElementById('createUserBtn')
+const createUserForm = document.getElementById('createUserForm')
+const userTypeSelect = document.getElementById('userTypeSelect')
 
+function showDisplayContent(element, displayStyle){
+    for (let i = 0; i < display.children.length; i++) {
+        const child = display.children[i];
+        if (child === element) {
+          child.style.display = displayStyle;
+        } else {
+          child.style.display = "none";
+        }
+    }
+}
 function createCardParagraphAndAppendClassName(className, textContent) {
     const paragraph = document.createElement('p')
     paragraph.className = className
     paragraph.textContent = textContent
     return paragraph
 }
-function appendSubjectsToSelectList() {
-    coursesSubjects.forEach((subject) => {
+function appendOptionToSelectList(array, select) {
+    array.forEach((subject) => {
         const option = document.createElement('option')
         option.value = subject
         option.text = subject
-        courseSubjectSelect.appendChild(option)
+        select.appendChild(option)
     })
 }
 function appendUsersToSelectList(selectList, userType) {
@@ -79,9 +98,6 @@ function addUsersToCourse(selectList, courseName) {
     selectedIds.forEach((userId) => {
         app.addUser(Number(userId), courseName)
     });
-}
-function courseExists(courses, courseName) {
-    return courses.find(course => course.name == courseName)
 }
 function setError(element, message) {
     const inputControl = element.parentElement
@@ -171,11 +187,17 @@ logo.addEventListener('click', () => {
     if (coursesArea.style.display = "block") {
         coursesArea.style.display = "none"
     }
-
+    if (usersArea.style.display = "block") {
+        usersArea.style.display = "none"
+    }
     if (createCourseForm.style.display = "flex") {
         createCourseForm.style.display = "none"
     }
+    if (createCourseConfirmation.style.display = "flex") {
+        createCourseConfirmation.style.display = "none"
+    }
 })
+
 coursesListBtn.addEventListener('click', () => {
     while (coursesList.lastChild) {
         coursesList.removeChild(coursesList.lastChild);
@@ -183,7 +205,7 @@ coursesListBtn.addEventListener('click', () => {
 
     courses.forEach((course) => {
         const courseCard = document.createElement('div')
-        courseCard.className = "courseCard"
+        courseCard.classList = "card courseCard"
 
         const courseName = createCardParagraphAndAppendClassName("courseName", course.name)
         const courseDescription = createCardParagraphAndAppendClassName("courseDescription", course.description)
@@ -194,22 +216,14 @@ coursesListBtn.addEventListener('click', () => {
         coursesList.appendChild(courseCard)
     })
 
-    welcomeMessage.style.display = "none"
-    coursesArea.style.display = "block"
+    showDisplayContent(coursesArea, "block")
     display.style.overflowY = "scroll"
-
-    if (createCourseForm.style.display = "flex") {
-        createCourseForm.style.display = "none"
-    }
-    if (createCourseConfirmation.style.display = "flex") {
-        createCourseConfirmation.style.display = "none"
-    }
 })
 createCourseBtn.addEventListener('click', () => {
-    coursesArea.style.display = "none"
-    createCourseForm.style.display = "flex"
+    showDisplayContent(createCourseForm, "flex")
+    display.style.overflowY = "scroll"
 
-    appendSubjectsToSelectList()
+    appendOptionToSelectList(coursesSubjects, courseSubjectSelect)
     appendUsersToSelectList(courseTeachersSelect, 'Teacher')
 })
 createCourseForm.addEventListener('submit', (event) => {
@@ -243,14 +257,16 @@ createCourseForm.addEventListener('input', debouce((event) => {
             break
     }
 }))
+
 usersListBtn.addEventListener('click', () => {
+
     while (usersList.lastChild) {
         usersList.removeChild(usersList.lastChild);
     }
 
     users.forEach((user) => {
         const userCard = document.createElement('div')
-        userCard.className = "card"
+        userCard.className = "card userCard"
 
         const userType = createCardParagraphAndAppendClassName("userType", user.type)
         const userName = createCardParagraphAndAppendClassName("userName", user.name)
@@ -260,9 +276,19 @@ usersListBtn.addEventListener('click', () => {
 
         userCard.append(userType, userName, userEmail, userCPF, userPhone)
         usersList.appendChild(userCard)
-
-        welcomeMessage.style.display = "none"
-        usersArea.style.display = "block"
-        display.style.overflowY = "scroll"
     })
+    
+    showDisplayContent(usersArea, "block")
+    display.style.overflowY = "scroll"
+})
+createUserBtn.addEventListener('click', () => {
+    showDisplayContent(createUserForm, "flex")
+    display.style.overflowY = "scroll"
+
+    appendOptionToSelectList(usersTypes, userTypeSelect)
+})
+createUserForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const
 })
