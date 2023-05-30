@@ -14,7 +14,6 @@ app.createCourseSubject("Concursos")
 app.createCourseSubject("Prática e atualização")
 app.createCourseSubject("Plano OAB")
 
-
 app.createUser("Teacher", "Nidal", "nidal@courses.com.br", "penalnaveia", "213.321.340-02", "(51) 9 9534-2234")
 app.createUser("Teacher", "Cleize", "cleize@courses.com.br", "trabalhonaveia", "324.132.543-41", "(51) 9 9534-2544")
 app.createUser("Teacher", "Fetter", "fetter@courses.com.br", "civilnaveia", "865.657.765-32", "(51) 9 9534-2655")
@@ -53,6 +52,12 @@ const usersList = document.getElementById('usersList')
 const createUserBtn = document.getElementById('createUserBtn')
 const createUserForm = document.getElementById('createUserForm')
 const userTypeSelect = document.getElementById('userTypeSelect')
+const userNameInput = document.getElementById('userNameInput')
+const userEmailInput = document.getElementById('userEmailInput')
+const userPasswordInput = document.getElementById('userPasswordInput')
+const userCPFInput = document.getElementById('userCPFInput')
+const userPhoneInput = document.getElementById('userPhoneInput')
+const createUserConfirmation = document.getElementById('createUserConfirmation')
 
 function showDisplayContent(element, displayStyle){
     for (let i = 0; i < display.children.length; i++) {
@@ -157,14 +162,108 @@ function validateCoursePrice() {
 
     return valid
 }
+
+function validateUserName() {
+    let valid = false
+    const namePattern = /^[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]+([a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF'\s-])*[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]$/
+
+    const userName = userNameInput.value.trim()
+
+    if (userName === '') {
+        setError(userNameInput, 'Cannot be blank!')
+    } else if(!namePattern.test(userName)){
+        setError(userNameInput, 'Name is not valid!')
+    } else {
+        setSuccess(userNameInput)
+        valid = true
+    }
+
+    return valid
+}
+function validateUserEmail(){
+    let valid = false
+    const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+
+    const userEmail = userEmailInput.value.trim()
+
+    if (userEmail === '') {
+        setError(userEmailInput, 'Cannot be blank!')
+    } else if(!emailPattern.test(userEmail)){
+        setError(userEmailInput, 'Email is not valid!')
+    } else {
+        setSuccess(userEmailInput)
+        valid = true
+    }
+
+    return valid
+}
+function validateUserPassword() {
+    let valid = false
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+
+    const userPassword = userPasswordInput.value.trim()
+
+    if (userPassword === '') {
+        setError(userPasswordInput, 'Cannot be blank!')
+    } else if(!passwordPattern.test(userPassword)){
+        setError(userPasswordInput, 'Password is not valid!')
+    } else {
+        setSuccess(userPasswordInput)
+        valid = true
+    }
+
+    return valid
+}
+function validateUserCPF(){
+    let valid = false
+    const CPFPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
+    
+    const userCPF = userCPFInput.value.trim()
+
+    if (userCPF === '') {
+        setError(userCPFInput, 'Cannot be blank!')
+    } else if(!CPFPattern.test(userCPF)){
+        setError(userCPFInput, 'CPF is not valid!')
+    } else {
+        setSuccess(userCPFInput)
+        valid = true
+    }
+
+    return valid
+}
+function validateUserPhone(){
+    let valid = false
+    const PhonePattern = /^(\+55)?\s*(\()?(\d{2})?(\))?\s*([9])?\s*(\d{4})[-.\s]?(\d{4})$/
+
+    const userPhone = userPhoneInput.value
+
+    if (userPhone === '') {
+        setError(userPhoneInput, 'Cannot be blank!')
+    } else if(!PhonePattern.test(userPhone)){
+        setError(userPhoneInput, 'Phone is not valid!')
+    } else {
+        setSuccess(userPhoneInput)
+        valid = true
+    }
+
+    return valid
+}
+
 function validateInputs() {
     let isCourseNameValid = validateCourseName()
     let isCourseDescriptionValid = validateCourseDescription()
     let isCoursePriceValid = validateCoursePrice()
 
-    let isFormValid = isCourseNameValid && isCourseDescriptionValid && isCoursePriceValid
+    let isUserNameValid = validateUserName()
+    let isUserEmailValid = validateUserEmail()
+    let isUserPasswordValid = validateUserPassword()
+    let isUserCPFValid = validateUserCPF()
+    let isUserPhoneValid =  validateUserPhone()
 
-    return isFormValid
+    let isCourseFormValid = isCourseNameValid && isCourseDescriptionValid && isCoursePriceValid
+    let isUserFormValid = isUserNameValid && isUserEmailValid && isUserPasswordValid && isUserCPFValid && isUserPhoneValid
+
+    return isCourseFormValid || isUserFormValid
 }
 function debouce(fn, delay = 500) {
     let timeoutId
@@ -181,20 +280,15 @@ function debouce(fn, delay = 500) {
 }
 
 logo.addEventListener('click', () => {
-    welcomeMessage.style.display = "flex"
-    display.style.overflowY = "none"
+    welcomeMessage.style.display = "flex";
+    display.style.overflowY = "none";
 
-    if (coursesArea.style.display = "block") {
-        coursesArea.style.display = "none"
-    }
-    if (usersArea.style.display = "block") {
-        usersArea.style.display = "none"
-    }
-    if (createCourseForm.style.display = "flex") {
-        createCourseForm.style.display = "none"
-    }
-    if (createCourseConfirmation.style.display = "flex") {
-        createCourseConfirmation.style.display = "none"
+    const displayChildren = display.children;
+
+    for (const child of displayChildren) {
+        if (child !== welcomeMessage) {
+            child.style.display = "none";
+        }
     }
 })
 
@@ -203,7 +297,7 @@ coursesListBtn.addEventListener('click', () => {
         coursesList.removeChild(coursesList.lastChild);
     }
 
-    courses.forEach((course) => {
+    courses.forEach((course, index) => {
         const courseCard = document.createElement('div')
         courseCard.classList = "card courseCard"
 
@@ -218,6 +312,7 @@ coursesListBtn.addEventListener('click', () => {
 
     showDisplayContent(coursesArea, "block")
     display.style.overflowY = "scroll"
+    console.log(courses)
 })
 createCourseBtn.addEventListener('click', () => {
     showDisplayContent(createCourseForm, "flex")
@@ -290,5 +385,37 @@ createUserBtn.addEventListener('click', () => {
 createUserForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
-    const
+    const userType = document.getElementById('userTypeSelect').value
+    const userName = document.getElementById('userNameInput').value
+    const userEmail = document.getElementById('userEmailInput').value
+    const userPassword = document.getElementById('userPasswordInput').value
+    const userCPF = document.getElementById('userCPFInput').value
+    const userPhone = document.getElementById('userPhoneInput').value
+
+    if(validateInputs()){
+        app.createUser(userType, userName, userEmail, userPassword, userCPF, userPhone)
+
+        createUserForm.style.display = "none"
+        createUserConfirmation.style.display = "flex"
+        display.style.overflowY = "none"
+    }
 })
+createUserForm.addEventListener('input', debouce((event) => {
+    switch (event.target.id) {
+        case 'userNameInput':
+            validateUserName()
+            break
+        case 'userEmailInput':
+            validateUserEmail()
+            break
+        case 'userPasswordInput':
+            validateUserPassword()
+            break
+        case 'userCPFInput':
+            validateUserCPF()
+            break
+        case 'userPhoneInput':
+            validateUserPhone()
+            break
+    }
+}))

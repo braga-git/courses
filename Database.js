@@ -7,7 +7,7 @@ export class Database {
         users: [],
         usersTypes: []
     }
-    
+     
     find(key) {
         return this.#storage[key]
     }
@@ -15,6 +15,7 @@ export class Database {
     saveCourse(newCourse) {
         const courseExists = this.#storage.courses.find(course => course.name === newCourse.name)
         if (!courseExists) {
+            newCourse.id = this.#storage.courses.length
             this.#storage.courses.push(newCourse)
         }
     }

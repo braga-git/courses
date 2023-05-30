@@ -1,5 +1,6 @@
 export class Course {
     constructor(name, description, subject, price) {
+        this.id
         this.name = name
         this.description = description
         this.subject = subject
@@ -15,5 +16,4 @@ export class Course {
     addToStudents(user) {
         this.students.push(user)
     }
-
 }
