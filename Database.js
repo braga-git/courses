@@ -31,6 +31,12 @@ export class Database {
         return this.#storage.courses.find(course => course.name === courseName)
     }
 
+    removeCourseFromDatabase(courseId){
+        const courses = this.#storage.courses;
+        const updatedCourses = courses.filter(course => course.id !== courseId);
+        this.#storage.courses = updatedCourses
+    }
+
     saveUser(newUser) {
         const userExists = this.#storage.users.find(user => user.email === newUser)
 

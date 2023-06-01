@@ -10,6 +10,10 @@ export class App {
         App.#database.saveCourse(course)
     }
 
+    deleteCourse(courseId){
+        App.#database.removeCourseFromDatabase(courseId)
+    }
+
     getCourses(){
         return App.#database.find('courses')
     }

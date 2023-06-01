@@ -141,20 +141,52 @@ body {
                     padding: 30px;
 
                     .courseCard {
-                        .courseName {
-                            font-size: 18px;
-                            font-weight: 700;
-                        }
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
 
-                        .courseDescription {
-                            font-size: 14px;
+                        p:nth-child(n+3){
+                            grid-column: span 2;
                         }
 
                         .courseSubject {
                             font-size: 12px;
                             font-weight: 700;
                         }
+                        .courseBtnsContainer{
+                            display: flex;
+                            justify-self: end;
+                            gap: 8px;
 
+                            
+                            .deleteCourseBtn, .editCourseBtn{
+                                background-color: transparent;
+                                border: none;
+                                font-size: 12px;       
+                                
+                                width: fit-content;
+                                height: auto;
+                                justify-self: end;
+                                padding: 0;
+                                
+                                &:hover {
+                                    cursor: pointer;
+                                    background-color: transparent;
+                                    color: red;
+                                    transition: 0.3s;
+                                }
+                            }
+                            
+                            .editCourseBtn:hover{
+                                color: #0050ff;
+                            }
+                        }
+                        .courseName {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+                        .courseDescription {
+                            font-size: 14px;
+                        }
                         .coursePrice {
                             font-weight: 600;
                         }

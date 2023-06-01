@@ -24,8 +24,7 @@ app.createUser("Student", "Luiza", "luiza@cap.com", "senhamestra123", "123.435.4
 app.createUserType("Teacher")
 app.createUserType("Student")
 
-
-const courses = app.getCourses()
+let courses = app.getCourses()
 const users = app.getUsers()
 const coursesSubjects = app.getCoursesSubjects()
 const usersTypes = app.getUsersTypes()
@@ -68,6 +67,13 @@ function showDisplayContent(element, displayStyle){
           child.style.display = "none";
         }
     }
+}
+function createCourseButton(classList){
+    const btn = document.createElement('button')
+    const buttonIcon = document.createElement('i')
+    btn.classList = classList
+    btn.appendChild(buttonIcon)
+    return btn
 }
 function createCardParagraphAndAppendClassName(className, textContent) {
     const paragraph = document.createElement('p')
@@ -297,17 +303,31 @@ coursesListBtn.addEventListener('click', () => {
         coursesList.removeChild(coursesList.lastChild);
     }
 
-    courses.forEach((course, index) => {
+    courses.forEach((course) => {
         const courseCard = document.createElement('div')
         courseCard.classList = "card courseCard"
+        
+        const courseBtnsContainer = document.createElement('div')
+        courseBtnsContainer.className = "courseBtnsContainer"
+
+        const editCourseBtn = createCourseButton("editCourseBtn fa-sharp fa-solid fa-pen-to-square fa-2xs")
+        const deleteCourseBtn = createCourseButton("deleteCourseBtn fa-regular fa-trash fa-2xs")
+        courseBtnsContainer.append(editCourseBtn, deleteCourseBtn)
 
         const courseName = createCardParagraphAndAppendClassName("courseName", course.name)
         const courseDescription = createCardParagraphAndAppendClassName("courseDescription", course.description)
         const courseSubject = createCardParagraphAndAppendClassName("courseSubject", course.subject)
         const coursePrice = createCardParagraphAndAppendClassName("coursePrice", `R$${course.price}`)
 
-        courseCard.append(courseSubject, courseName, courseDescription, coursePrice)
+        courseCard.append(courseSubject, courseBtnsContainer, courseName, courseDescription, coursePrice)
         coursesList.appendChild(courseCard)
+
+        deleteCourseBtn.addEventListener('click', () => {
+            const courseId = app.getACourse(course.name).id
+            app.deleteCourse(courseId)
+            courses = app.getCourses()
+            coursesList.removeChild(courseCard)
+        })
     })
 
     showDisplayContent(coursesArea, "block")

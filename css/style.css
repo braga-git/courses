@@ -114,16 +114,46 @@ body #content #display #coursesArea #coursesList {
   gap: 15px;
   padding: 30px;
 }
+body #content #display #coursesArea #coursesList .courseCard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+body #content #display #coursesArea #coursesList .courseCard p:nth-child(n+3) {
+  grid-column: span 2;
+}
+body #content #display #coursesArea #coursesList .courseCard .courseSubject {
+  font-size: 12px;
+  font-weight: 700;
+}
+body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer {
+  display: flex;
+  justify-self: end;
+  gap: 8px;
+}
+body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .deleteCourseBtn, body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .editCourseBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 12px;
+  width: fit-content;
+  height: auto;
+  justify-self: end;
+  padding: 0;
+}
+body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .deleteCourseBtn:hover, body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .editCourseBtn:hover {
+  cursor: pointer;
+  background-color: transparent;
+  color: red;
+  transition: 0.3s;
+}
+body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .editCourseBtn:hover {
+  color: #0050ff;
+}
 body #content #display #coursesArea #coursesList .courseCard .courseName {
   font-size: 18px;
   font-weight: 700;
 }
 body #content #display #coursesArea #coursesList .courseCard .courseDescription {
   font-size: 14px;
-}
-body #content #display #coursesArea #coursesList .courseCard .courseSubject {
-  font-size: 12px;
-  font-weight: 700;
 }
 body #content #display #coursesArea #coursesList .courseCard .coursePrice {
   font-weight: 600;
