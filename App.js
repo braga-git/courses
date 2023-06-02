@@ -27,12 +27,16 @@ export class App {
         App.#database.saveUser(user)
     }
 
+    deleteUser(userId){
+        App.#database.removeUserFromDatabase(userId)
+    }
+
     getUsers() {
         return App.#database.find('users')
     }
 
-    getAUser(userEmail) {
-        return App.#database.findUserByEmail(userEmail)
+    getAUser(userId) {
+        return App.#database.findUserById(userId)
     }
     
     getTeachers() {

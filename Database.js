@@ -43,15 +43,12 @@ export class Database {
         if (!userExists && newUser.type === 'Teacher') {
             this.#storage.users.push(newUser)
             this.#storage.teachers.push(newUser)
+            newUser.id = this.#storage.users.length
         } else {
             this.#storage.users.push(newUser)
             this.#storage.students.push(newUser)
+            newUser.id = this.#storage.users.length
         }
-
-        this.#storage.users.forEach((user) => {
-            const userId = this.#storage.users.indexOf(user)
-            newUser.id = userId
-        })
     }
     
     saveUserType(newUserType){
@@ -63,6 +60,12 @@ export class Database {
 
     findUserById(userId) {
         return this.#storage.users.find(user => user.id === userId)
+    }
+
+    removeUserFromDatabase(userId){
+        const users = this.#storage.users;
+        const updatedUsers = users.filter(user => user.id !== userId);
+        this.#storage.users = updatedUsers
     }
 
     addUserToCourse(userId, courseName) {

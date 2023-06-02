@@ -25,7 +25,7 @@ app.createUserType("Teacher")
 app.createUserType("Student")
 
 let courses = app.getCourses()
-const users = app.getUsers()
+let users = app.getUsers()
 const coursesSubjects = app.getCoursesSubjects()
 const usersTypes = app.getUsersTypes()
 
@@ -68,7 +68,7 @@ function showDisplayContent(element, displayStyle){
         }
     }
 }
-function createCourseButton(classList){
+function createCardButton(classList){
     const btn = document.createElement('button')
     const buttonIcon = document.createElement('i')
     btn.classList = classList
@@ -80,6 +80,19 @@ function createCardParagraphAndAppendClassName(className, textContent) {
     paragraph.className = className
     paragraph.textContent = textContent
     return paragraph
+}
+function createUserCardInfoDiv(titleContent, infoClass, infoContent){
+    const div = document.createElement('div')
+    div.classList = "userCardInfoDiv"
+    const title = document.createElement('p')
+    title.classList = "userCardInfoTitle"
+    title.textContent = titleContent
+    const paragraph = document.createElement('p')
+    paragraph.classList = infoClass
+    paragraph.textContent = infoContent
+
+    div.append(title, paragraph)
+    return div
 }
 function appendOptionToSelectList(array, select) {
     array.forEach((subject) => {
@@ -168,7 +181,6 @@ function validateCoursePrice() {
 
     return valid
 }
-
 function validateUserName() {
     let valid = false
     const namePattern = /^[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]+([a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF'\s-])*[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]$/
@@ -254,7 +266,6 @@ function validateUserPhone(){
 
     return valid
 }
-
 function validateInputs() {
     let isCourseNameValid = validateCourseName()
     let isCourseDescriptionValid = validateCourseDescription()
@@ -307,24 +318,23 @@ coursesListBtn.addEventListener('click', () => {
         const courseCard = document.createElement('div')
         courseCard.classList = "card courseCard"
         
-        const courseBtnsContainer = document.createElement('div')
-        courseBtnsContainer.className = "courseBtnsContainer"
+        const cardBtnsContainer = document.createElement('div')
+        cardBtnsContainer.className = "cardBtnsContainer"
 
-        const editCourseBtn = createCourseButton("editCourseBtn fa-sharp fa-solid fa-pen-to-square fa-2xs")
-        const deleteCourseBtn = createCourseButton("deleteCourseBtn fa-regular fa-trash fa-2xs")
-        courseBtnsContainer.append(editCourseBtn, deleteCourseBtn)
+        const editCourseBtn = createCardButton("editCardBtn fa-sharp fa-solid fa-pen-to-square fa-2xs")
+        const deleteCourseBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
+        cardBtnsContainer.append(editCourseBtn, deleteCourseBtn)
 
         const courseName = createCardParagraphAndAppendClassName("courseName", course.name)
         const courseDescription = createCardParagraphAndAppendClassName("courseDescription", course.description)
         const courseSubject = createCardParagraphAndAppendClassName("courseSubject", course.subject)
         const coursePrice = createCardParagraphAndAppendClassName("coursePrice", `R$${course.price}`)
 
-        courseCard.append(courseSubject, courseBtnsContainer, courseName, courseDescription, coursePrice)
+        courseCard.append(courseSubject, cardBtnsContainer, courseName, courseDescription, coursePrice)
         coursesList.appendChild(courseCard)
 
         deleteCourseBtn.addEventListener('click', () => {
-            const courseId = app.getACourse(course.name).id
-            app.deleteCourse(courseId)
+            app.deleteCourse(course.id)
             courses = app.getCourses()
             coursesList.removeChild(courseCard)
         })
@@ -383,14 +393,27 @@ usersListBtn.addEventListener('click', () => {
         const userCard = document.createElement('div')
         userCard.className = "card userCard"
 
-        const userType = createCardParagraphAndAppendClassName("userType", user.type)
-        const userName = createCardParagraphAndAppendClassName("userName", user.name)
-        const userEmail = createCardParagraphAndAppendClassName("userEmail", user.email)
-        const userCPF = createCardParagraphAndAppendClassName("userCPF", user.cpf)
-        const userPhone = createCardParagraphAndAppendClassName("userPhone", user.phone)
+        const cardBtnsContainer = document.createElement('div')
+        cardBtnsContainer.className = "cardBtnsContainer"
 
-        userCard.append(userType, userName, userEmail, userCPF, userPhone)
+        const editUserBtn = createCardButton("editCardBtn fa-sharp fa-solid fa-pen-to-square fa-2xs")
+        const deleteUserBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
+        cardBtnsContainer.append(editUserBtn, deleteUserBtn)
+
+        const userType = createUserCardInfoDiv("Type", "userType", user.type)
+        const userName = createUserCardInfoDiv("Name", "userName", user.name)
+        const userEmail = createUserCardInfoDiv("Email", "userEmail", user.email)
+        const userCPF = createUserCardInfoDiv("CPF", "userCPF", user.cpf)
+        const userPhone = createUserCardInfoDiv("Phone", "userPhone", user.phone)
+
+        userCard.append(userType, cardBtnsContainer, userName, userCPF, userEmail, userPhone)
         usersList.appendChild(userCard)
+
+        deleteUserBtn.addEventListener('click', () => {
+            app.deleteUser(user.id)
+            users = app.getUsers()
+            usersList.removeChild(userCard)
+        })
     })
     
     showDisplayContent(usersArea, "block")

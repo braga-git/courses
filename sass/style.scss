@@ -106,12 +106,12 @@ body {
                     font-weight: 600;
                     color: #0050ff;
                 }
-
+                
                 small {
                     color: #cacaca;
                 }
             }
-
+            
             .card {
                 background-color: #f9f9f9;
                 min-height: fit-content;
@@ -121,6 +121,33 @@ body {
 
                 border: 1px solid black;
                 padding: 15px;
+            }
+            
+            .cardBtnsContainer{
+                display: flex;
+                justify-self: end;
+                gap: 8px;
+
+                .deleteCardBtn, .editCardBtn{
+                    background-color: transparent;
+                    border: none;
+                    font-size: 12px;       
+                    
+                    width: fit-content;
+                    height: auto;
+                    padding: 0;
+                    
+                    &:hover {
+                        cursor: pointer;
+                        background-color: transparent;
+                        color: red;
+                        transition: 0.3s;
+                    }
+                }
+                
+                .editCardBtn:hover{
+                    color: #0050ff;
+                }
             }
 
             #createCourseBtn, #createUserBtn {
@@ -151,34 +178,6 @@ body {
                         .courseSubject {
                             font-size: 12px;
                             font-weight: 700;
-                        }
-                        .courseBtnsContainer{
-                            display: flex;
-                            justify-self: end;
-                            gap: 8px;
-
-                            
-                            .deleteCourseBtn, .editCourseBtn{
-                                background-color: transparent;
-                                border: none;
-                                font-size: 12px;       
-                                
-                                width: fit-content;
-                                height: auto;
-                                justify-self: end;
-                                padding: 0;
-                                
-                                &:hover {
-                                    cursor: pointer;
-                                    background-color: transparent;
-                                    color: red;
-                                    transition: 0.3s;
-                                }
-                            }
-                            
-                            .editCourseBtn:hover{
-                                color: #0050ff;
-                            }
                         }
                         .courseName {
                             font-size: 18px;
@@ -273,14 +272,23 @@ body {
                     padding: 30px;
 
                     .userCard{
-                        .userType{
-                            font-size: 12px;
+                        gap: 15px;
+                        display: grid;
+                        grid-template-columns: 65% 2fr;
+
+                        .userCardInfoTitle{
+                            font-size: 14px;
                             font-weight: 700;
+                            margin-bottom: 5px;
                         }
-                        .userName{
-                            font-size: 18px;
-                            font-weight: 700;
+
+                        .cardBtnsContainer{
+                            .deleteCardBtn, .editCardBtn{
+                                align-self: baseline;
+                                padding-top: 7px;
+                            }
                         }
+
                     }
                 }
             }

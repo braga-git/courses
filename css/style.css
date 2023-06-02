@@ -100,6 +100,28 @@ body #content #display .card {
   border: 1px solid black;
   padding: 15px;
 }
+body #content #display .cardBtnsContainer {
+  display: flex;
+  justify-self: end;
+  gap: 8px;
+}
+body #content #display .cardBtnsContainer .deleteCardBtn, body #content #display .cardBtnsContainer .editCardBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 12px;
+  width: fit-content;
+  height: auto;
+  padding: 0;
+}
+body #content #display .cardBtnsContainer .deleteCardBtn:hover, body #content #display .cardBtnsContainer .editCardBtn:hover {
+  cursor: pointer;
+  background-color: transparent;
+  color: red;
+  transition: 0.3s;
+}
+body #content #display .cardBtnsContainer .editCardBtn:hover {
+  color: #0050ff;
+}
 body #content #display #createCourseBtn, body #content #display #createUserBtn {
   border: 1px black;
   border-style: hidden hidden solid hidden;
@@ -124,29 +146,6 @@ body #content #display #coursesArea #coursesList .courseCard p:nth-child(n+3) {
 body #content #display #coursesArea #coursesList .courseCard .courseSubject {
   font-size: 12px;
   font-weight: 700;
-}
-body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer {
-  display: flex;
-  justify-self: end;
-  gap: 8px;
-}
-body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .deleteCourseBtn, body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .editCourseBtn {
-  background-color: transparent;
-  border: none;
-  font-size: 12px;
-  width: fit-content;
-  height: auto;
-  justify-self: end;
-  padding: 0;
-}
-body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .deleteCourseBtn:hover, body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .editCourseBtn:hover {
-  cursor: pointer;
-  background-color: transparent;
-  color: red;
-  transition: 0.3s;
-}
-body #content #display #coursesArea #coursesList .courseCard .courseBtnsContainer .editCourseBtn:hover {
-  color: #0050ff;
 }
 body #content #display #coursesArea #coursesList .courseCard .courseName {
   font-size: 18px;
@@ -222,13 +221,19 @@ body #content #display #usersArea #usersList {
   gap: 15px;
   padding: 30px;
 }
-body #content #display #usersArea #usersList .userCard .userType {
-  font-size: 12px;
-  font-weight: 700;
+body #content #display #usersArea #usersList .userCard {
+  gap: 15px;
+  display: grid;
+  grid-template-columns: 65% 2fr;
 }
-body #content #display #usersArea #usersList .userCard .userName {
-  font-size: 18px;
+body #content #display #usersArea #usersList .userCard .userCardInfoTitle {
+  font-size: 14px;
   font-weight: 700;
+  margin-bottom: 5px;
+}
+body #content #display #usersArea #usersList .userCard .cardBtnsContainer .deleteCardBtn, body #content #display #usersArea #usersList .userCard .cardBtnsContainer .editCardBtn {
+  align-self: baseline;
+  padding-top: 7px;
 }
 
 /*# sourceMappingURL=style.css.map */
