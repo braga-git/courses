@@ -2,18 +2,18 @@ import { App } from './App.js';
 
 const app = new App()
 
-app.createCourse("Curso OAB 1ª fase 38º Exame - Intensivo Turbo Ao Vivo", "Preparação completa e eficaz para aprovação na 1ª fase do exame da OAB, com destaque nas principais disciplinas.", "OAB 1ª Fase", 589.65)
-app.createCourse("Curso OAB 2ª Fase Trabalho 37º Exame", "Preparatório completo com metodologia prática e professores altamente qualificados para a aprovação na 2ª fase do exame da OAB na área de Direito do Trabalho, edição 37.", "OAB 2ª Fase", 652.54)
-app.createCourse("Carreiras Tribunais | Analista Judiciário - Área Judiciária", "Preparatório para Analista Judiciário - Área Judiciária de Tribunais com metodologia prática e enfoque em conteúdos específicos para aprovação em concursos.", "Concursos", 1243.32)
-app.createCourse("Advocacia Trabalhista e Compliance", "Curso especializado em Advocacia Trabalhista e Compliance, com enfoque na prática e atualização profissional para a área.", "Prática e atualização", 543.76)
-app.createCourse("Plano OAB 3.0 38º Exame", "Curso completo para aprovação nas 1ª e 2ª fases do exame da OAB, com metodologia prática e professores especializados.", "Plano OAB", 1352.65)
-
 app.createCourseSubject("OAB 1ª Fase")
 app.createCourseSubject("OAB 2ª Fase")
 app.createCourseSubject("Concursos")
 app.createCourseSubject("Prática e atualização")
 app.createCourseSubject("Plano OAB")
-
+app.createUserType("Teacher")
+app.createUserType("Student")
+app.createCourse("Curso OAB 1ª fase 38º Exame - Intensivo Turbo Ao Vivo", "Preparação completa e eficaz para aprovação na 1ª fase do exame da OAB, com destaque nas principais disciplinas.", "OAB 1ª Fase", 589.65)
+app.createCourse("Curso OAB 2ª Fase Trabalho 37º Exame", "Preparatório completo com metodologia prática e professores altamente qualificados para a aprovação na 2ª fase do exame da OAB na área de Direito do Trabalho, edição 37.", "OAB 2ª Fase", 652.54)
+app.createCourse("Carreiras Tribunais | Analista Judiciário - Área Judiciária", "Preparatório para Analista Judiciário - Área Judiciária de Tribunais com metodologia prática e enfoque em conteúdos específicos para aprovação em concursos.", "Concursos", 1243.32)
+app.createCourse("Advocacia Trabalhista e Compliance", "Curso especializado em Advocacia Trabalhista e Compliance, com enfoque na prática e atualização profissional para a área.", "Prática e atualização", 543.76)
+app.createCourse("Plano OAB 3.0 38º Exame", "Curso completo para aprovação nas 1ª e 2ª fases do exame da OAB, com metodologia prática e professores especializados.", "Plano OAB", 1352.65)
 app.createUser("Teacher", "Nidal", "nidal@courses.com.br", "penalnaveia", "213.321.340-02", "(51) 9 9534-2234")
 app.createUser("Teacher", "Cleize", "cleize@courses.com.br", "trabalhonaveia", "324.132.543-41", "(51) 9 9534-2544")
 app.createUser("Teacher", "Fetter", "fetter@courses.com.br", "civilnaveia", "865.657.765-32", "(51) 9 9534-2655")
@@ -21,11 +21,9 @@ app.createUser("Teacher", "Douglas", "douglas@courses.com.br", "filosofianaveia"
 app.createUser("Teacher", "Matheus", "matheus@courses.com.br", "ambientalnaveia", "436.123.321-76", "(51) 9 9534-2987")
 app.createUser("Student", "Luiza", "luiza@cap.com", "senhamestra123", "123.435.443-43", "(51) 9 9214-3214")
 
-app.createUserType("Teacher")
-app.createUserType("Student")
-
 let courses = app.getCourses()
 let users = app.getUsers()
+let userIdSelected
 const coursesSubjects = app.getCoursesSubjects()
 const usersTypes = app.getUsersTypes()
 
@@ -50,13 +48,21 @@ const usersArea = document.getElementById('usersArea')
 const usersList = document.getElementById('usersList')
 const createUserBtn = document.getElementById('createUserBtn')
 const createUserForm = document.getElementById('createUserForm')
-const userTypeSelect = document.getElementById('userTypeSelect')
-const userNameInput = document.getElementById('userNameInput')
-const userEmailInput = document.getElementById('userEmailInput')
-const userPasswordInput = document.getElementById('userPasswordInput')
-const userCPFInput = document.getElementById('userCPFInput')
-const userPhoneInput = document.getElementById('userPhoneInput')
+const createUserTypeSelect = document.getElementById('createUserTypeSelect')
+const createUserNameInput = document.getElementById('createUserNameInput')
+const createUserEmailInput = document.getElementById('createUserEmailInput')
+const createUserPasswordInput = document.getElementById('createUserPasswordInput')
+const createUserCPFInput = document.getElementById('createUserCPFInput')
+const createUserPhoneInput = document.getElementById('createUserPhoneInput')
 const createUserConfirmation = document.getElementById('createUserConfirmation')
+
+const editUserForm = document.getElementById('editUserForm')
+const editUserTypeSelect = document.getElementById('editUserTypeSelect')
+const editUserNameInput = document.getElementById('editUserNameInput')
+const editUserEmailInput = document.getElementById('editUserEmailInput')
+const editUserPasswordInput = document.getElementById('editUserPasswordInput')
+const editUserCPFInput = document.getElementById('editUserCPFInput')
+const editUserPhoneInput = document.getElementById('editUserPhoneInput')
 
 function showDisplayContent(element, displayStyle){
     for (let i = 0; i < display.children.length; i++) {
@@ -185,14 +191,14 @@ function validateUserName() {
     let valid = false
     const namePattern = /^[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]+([a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF'\s-])*[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]$/
 
-    const userName = userNameInput.value.trim()
+    const userName = createUserNameInput.value.trim()
 
     if (userName === '') {
-        setError(userNameInput, 'Cannot be blank!')
+        setError(createUserNameInput, 'Cannot be blank!')
     } else if(!namePattern.test(userName)){
-        setError(userNameInput, 'Name is not valid!')
+        setError(createUserNameInput, 'Name is not valid!')
     } else {
-        setSuccess(userNameInput)
+        setSuccess(createUserNameInput)
         valid = true
     }
 
@@ -202,14 +208,14 @@ function validateUserEmail(){
     let valid = false
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 
-    const userEmail = userEmailInput.value.trim()
+    const userEmail = createUserEmailInput.value.trim()
 
     if (userEmail === '') {
-        setError(userEmailInput, 'Cannot be blank!')
+        setError(createUserEmailInput, 'Cannot be blank!')
     } else if(!emailPattern.test(userEmail)){
-        setError(userEmailInput, 'Email is not valid!')
+        setError(createUserEmailInput, 'Email is not valid!')
     } else {
-        setSuccess(userEmailInput)
+        setSuccess(createUserEmailInput)
         valid = true
     }
 
@@ -219,14 +225,14 @@ function validateUserPassword() {
     let valid = false
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
 
-    const userPassword = userPasswordInput.value.trim()
+    const userPassword = createUserPasswordInput.value.trim()
 
     if (userPassword === '') {
-        setError(userPasswordInput, 'Cannot be blank!')
+        setError(createUserPasswordInput, 'Cannot be blank!')
     } else if(!passwordPattern.test(userPassword)){
-        setError(userPasswordInput, 'Password is not valid!')
+        setError(createUserPasswordInput, 'Password is not valid!')
     } else {
-        setSuccess(userPasswordInput)
+        setSuccess(createUserPasswordInput)
         valid = true
     }
 
@@ -236,14 +242,14 @@ function validateUserCPF(){
     let valid = false
     const CPFPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
     
-    const userCPF = userCPFInput.value.trim()
+    const userCPF = createUserCPFInput.value.trim()
 
     if (userCPF === '') {
-        setError(userCPFInput, 'Cannot be blank!')
+        setError(createUserCPFInput, 'Cannot be blank!')
     } else if(!CPFPattern.test(userCPF)){
-        setError(userCPFInput, 'CPF is not valid!')
+        setError(createUserCPFInput, 'CPF is not valid!')
     } else {
-        setSuccess(userCPFInput)
+        setSuccess(createUserCPFInput)
         valid = true
     }
 
@@ -253,14 +259,14 @@ function validateUserPhone(){
     let valid = false
     const PhonePattern = /^(\+55)?\s*(\()?(\d{2})?(\))?\s*([9])?\s*(\d{4})[-.\s]?(\d{4})$/
 
-    const userPhone = userPhoneInput.value
+    const userPhone = createUserPhoneInput.value
 
     if (userPhone === '') {
-        setError(userPhoneInput, 'Cannot be blank!')
+        setError(createUserPhoneInput, 'Cannot be blank!')
     } else if(!PhonePattern.test(userPhone)){
-        setError(userPhoneInput, 'Phone is not valid!')
+        setError(createUserPhoneInput, 'Phone is not valid!')
     } else {
-        setSuccess(userPhoneInput)
+        setSuccess(createUserPhoneInput)
         valid = true
     }
 
@@ -392,14 +398,14 @@ usersListBtn.addEventListener('click', () => {
     users.forEach((user) => {
         const userCard = document.createElement('div')
         userCard.className = "card userCard"
-
+        
         const cardBtnsContainer = document.createElement('div')
         cardBtnsContainer.className = "cardBtnsContainer"
-
+        
         const editUserBtn = createCardButton("editCardBtn fa-sharp fa-solid fa-pen-to-square fa-2xs")
         const deleteUserBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
         cardBtnsContainer.append(editUserBtn, deleteUserBtn)
-
+        
         const userType = createUserCardInfoDiv("Type", "userType", user.type)
         const userName = createUserCardInfoDiv("Name", "userName", user.name)
         const userEmail = createUserCardInfoDiv("Email", "userEmail", user.email)
@@ -408,14 +414,27 @@ usersListBtn.addEventListener('click', () => {
 
         userCard.append(userType, cardBtnsContainer, userName, userCPF, userEmail, userPhone)
         usersList.appendChild(userCard)
-
+        
         deleteUserBtn.addEventListener('click', () => {
             app.deleteUser(user.id)
             users = app.getUsers()
             usersList.removeChild(userCard)
         })
+        
+        editUserBtn.addEventListener('click', () => {
+            showDisplayContent(editUserForm, "flex")
+            appendOptionToSelectList(usersTypes, editUserTypeSelect)
+            
+            editUserTypeSelect.value = user.type
+            editUserNameInput.value = user.name
+            editUserEmailInput.value  = user.email
+            editUserPasswordInput.value = user.password
+            editUserCPFInput.value = user.cpf
+            editUserPhoneInput.value = user.phone
+
+            userIdSelected = user.id
+        })
     })
-    
     showDisplayContent(usersArea, "block")
     display.style.overflowY = "scroll"
 })
@@ -423,17 +442,17 @@ createUserBtn.addEventListener('click', () => {
     showDisplayContent(createUserForm, "flex")
     display.style.overflowY = "scroll"
 
-    appendOptionToSelectList(usersTypes, userTypeSelect)
+    appendOptionToSelectList(usersTypes, createUserTypeSelect)
 })
 createUserForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
-    const userType = document.getElementById('userTypeSelect').value
-    const userName = document.getElementById('userNameInput').value
-    const userEmail = document.getElementById('userEmailInput').value
-    const userPassword = document.getElementById('userPasswordInput').value
-    const userCPF = document.getElementById('userCPFInput').value
-    const userPhone = document.getElementById('userPhoneInput').value
+    const userType = createUserTypeSelect.value
+    const userName = createUserNameInput.value
+    const userEmail = createUserEmailInput.value
+    const userPassword = createUserPasswordInput.value
+    const userCPF = createUserCPFInput.value
+    const userPhone = createUserPhoneInput.value
 
     if(validateInputs()){
         app.createUser(userType, userName, userEmail, userPassword, userCPF, userPhone)
@@ -444,7 +463,7 @@ createUserForm.addEventListener('submit', (event) => {
     }
 })
 createUserForm.addEventListener('input', debouce((event) => {
-    switch (event.target.id) {
+    switch (event.target.className) {
         case 'userNameInput':
             validateUserName()
             break
@@ -462,3 +481,17 @@ createUserForm.addEventListener('input', debouce((event) => {
             break
     }
 }))
+
+editUserForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    
+    const userType = editUserTypeSelect.value
+    const userName = editUserNameInput.value
+    const userEmail = editUserEmailInput.value
+    const userPassword = editUserPasswordInput.value
+    const userCPF = editUserCPFInput.value
+    const userPhone = editUserPhoneInput.value
+
+    app.editUser(userIdSelected, userType, userName, userEmail, userPassword, userCPF, userPhone)
+    console.log(userIdSelected)
+})

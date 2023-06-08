@@ -24,8 +24,13 @@ export class App {
 
     createUser(type, name, email, password, cpf, phone) {
         const user = new User(type, name, email, password, cpf, phone)
-        App.#database.saveUser(user)
+        App.#database.saveNewUser(user)
     }
+
+    editUser(userId, type, name, email, password, cpf, phone) {
+        App.#database.saveUserChanges(userId, type, name, email, password, cpf, phone)
+    }
+
 
     deleteUser(userId){
         App.#database.removeUserFromDatabase(userId)

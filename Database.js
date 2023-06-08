@@ -7,11 +7,11 @@ export class Database {
         users: [],
         usersTypes: []
     }
-     
+
     find(key) {
         return this.#storage[key]
     }
-    
+
     saveCourse(newCourse) {
         const courseExists = this.#storage.courses.find(course => course.name === newCourse.name)
         if (!courseExists) {
@@ -19,8 +19,8 @@ export class Database {
             this.#storage.courses.push(newCourse)
         }
     }
-    
-    saveCourseSubject(newCourseSubject){
+
+    saveCourseSubject(newCourseSubject) {
         const courseSubjectExists = this.#storage.coursesSubjects.find(courseSubject => courseSubject === newCourseSubject)
         if (!courseSubjectExists) {
             this.#storage.coursesSubjects.push(newCourseSubject)
@@ -31,14 +31,14 @@ export class Database {
         return this.#storage.courses.find(course => course.name === courseName)
     }
 
-    removeCourseFromDatabase(courseId){
+    removeCourseFromDatabase(courseId) {
         const courses = this.#storage.courses;
         const updatedCourses = courses.filter(course => course.id !== courseId);
         this.#storage.courses = updatedCourses
     }
 
-    saveUser(newUser) {
-        const userExists = this.#storage.users.find(user => user.email === newUser)
+    saveNewUser(newUser) {
+        const userExists = this.#storage.users.find(user => user.cpf === newUser.cpf)
 
         if (!userExists && newUser.type === 'Teacher') {
             this.#storage.users.push(newUser)
@@ -50,8 +50,33 @@ export class Database {
             newUser.id = this.#storage.users.length
         }
     }
-    
-    saveUserType(newUserType){
+
+    saveUserChanges(userId, newType, newName, newEmail, newPassword, newCpf, newPhone) {
+        const user = this.findUserById(userId)
+
+        // if (user.type !== newType) {
+        //     user.type = newType
+        // }
+        if (user?.name !== newName) {
+            user.name = newName
+        }
+        // if (user.email !== newEmail) {
+        //     user.email = newEmail
+        // }
+        // if (user.password !== newPassword) {
+        //     user.password = newPassword
+        // }
+        // if (user.cpf !== newCpf) {
+        //     user.cpf = newCpf
+        // }
+        // if (user.phone !== newPhone) {
+        //     user.phone = newPhone
+        // }
+        
+        console.log(user)
+    }
+
+    saveUserType(newUserType) {
         const userTypeExists = this.#storage.usersTypes.find(userType => userType === newUserType)
         if (!userTypeExists) {
             this.#storage.usersTypes.push(newUserType)
@@ -62,7 +87,7 @@ export class Database {
         return this.#storage.users.find(user => user.id === userId)
     }
 
-    removeUserFromDatabase(userId){
+    removeUserFromDatabase(userId) {
         const users = this.#storage.users;
         const updatedUsers = users.filter(user => user.id !== userId);
         this.#storage.users = updatedUsers
@@ -80,4 +105,6 @@ export class Database {
             user?.addToCourses(course)
         }
     }
+
+
 }

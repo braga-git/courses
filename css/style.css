@@ -157,55 +157,53 @@ body #content #display #coursesArea #coursesList .courseCard .courseDescription 
 body #content #display #coursesArea #coursesList .courseCard .coursePrice {
   font-weight: 600;
 }
-body #content #display #createCourseForm, body #content #display #createUserForm {
+body #content #display form {
   padding: 30px;
   display: none;
   flex-direction: column;
   justify-content: baseline;
   gap: 25px;
 }
-body #content #display #createCourseForm .formField, body #content #display #createUserForm .formField {
+body #content #display form .formField {
   display: flex;
   flex-direction: column;
   gap: 5px;
   width: 100%;
 }
-body #content #display #createCourseForm .formField input,
-body #content #display #createCourseForm .formField select,
-body #content #display #createCourseForm .formField option,
-body #content #display #createCourseForm .formField textarea, body #content #display #createUserForm .formField input,
-body #content #display #createUserForm .formField select,
-body #content #display #createUserForm .formField option,
-body #content #display #createUserForm .formField textarea {
+body #content #display form .formField label {
+  font-size: 14px;
+  font-weight: 700;
+}
+body #content #display form .formField input,
+body #content #display form .formField select,
+body #content #display form .formField option,
+body #content #display form .formField textarea {
   background-color: #f9f9f9;
   border: 1px solid black;
   padding: 15px;
 }
-body #content #display #createCourseForm .formField input,
-body #content #display #createCourseForm .formField textarea:focus, body #content #display #createUserForm .formField input,
-body #content #display #createUserForm .formField textarea:focus {
+body #content #display form .formField input,
+body #content #display form .formField textarea:focus {
   outline: none;
 }
-body #content #display #createCourseForm .formField #courseDescriptionTextarea, body #content #display #createUserForm .formField #courseDescriptionTextarea {
+body #content #display form .formField #courseDescriptionTextarea {
   font-size: 14px;
   resize: none;
   height: 200px;
 }
-body #content #display #createCourseForm .formField #courseTeachersSelect option, body #content #display #createUserForm .formField #courseTeachersSelect option {
+body #content #display form .formField #courseTeachersSelect option {
   margin: 3px;
 }
-body #content #display #createCourseForm .formField.error input,
-body #content #display #createCourseForm .formField.error textarea, body #content #display #createUserForm .formField.error input,
-body #content #display #createUserForm .formField.error textarea {
+body #content #display form .formField.error input,
+body #content #display form .formField.error textarea {
   border: 2px solid red;
 }
-body #content #display #createCourseForm .formField.error .error, body #content #display #createUserForm .formField.error .error {
+body #content #display form .formField.error .error {
   color: red;
   font-size: 14px;
 }
-body #content #display #createCourseForm .formField.success input,
-body #content #display #createCourseForm .formField.success textarea, body #content #display #createUserForm .formField.success input,
-body #content #display #createUserForm .formField.success textarea {
+body #content #display form .formField.success input,
+body #content #display form .formField.success textarea {
   border: 2px solid green;
 }
 body #content #display #createCourseConfirmation {

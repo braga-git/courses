@@ -193,7 +193,7 @@ body {
                 }
             }
 
-            #createCourseForm, #createUserForm {
+            form {
                 padding: 30px;
 
                 display: none;
@@ -206,6 +206,11 @@ body {
                     flex-direction: column;
                     gap: 5px;
                     width: 100%;
+
+                    label{
+                        font-size: 14px;
+                        font-weight: 700;
+                    }
 
                     input,
                     select,
