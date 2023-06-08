@@ -157,38 +157,37 @@ body {
 
             #coursesArea {
                 display: none;
+            }
 
+            #coursesList, #userCoursesList{
+                display: flex;
+                flex-direction: column;
+                justify-content: baseline;
+                gap: 15px;
 
-                #coursesList {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: baseline;
-                    gap: 15px;
+                padding: 30px;
 
-                    padding: 30px;
+                .courseCard {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
 
-                    .courseCard {
-                        display: grid;
-                        grid-template-columns: repeat(2, 1fr);
+                    p:nth-child(n+3){
+                        grid-column: span 2;
+                    }
 
-                        p:nth-child(n+3){
-                            grid-column: span 2;
-                        }
-
-                        .courseSubject {
-                            font-size: 12px;
-                            font-weight: 700;
-                        }
-                        .courseName {
-                            font-size: 18px;
-                            font-weight: 700;
-                        }
-                        .courseDescription {
-                            font-size: 14px;
-                        }
-                        .coursePrice {
-                            font-weight: 600;
-                        }
+                    .courseSubject {
+                        font-size: 12px;
+                        font-weight: 700;
+                    }
+                    .courseName {
+                        font-size: 18px;
+                        font-weight: 700;
+                    }
+                    .courseDescription {
+                        font-size: 14px;
+                    }
+                    .coursePrice {
+                        font-weight: 600;
                     }
                 }
             }
@@ -296,6 +295,10 @@ body {
 
                     }
                 }
+            }
+
+            #userCoursesList{
+                padding: 0;
             }
         }
     }

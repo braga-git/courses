@@ -129,32 +129,32 @@ body #content #display #createCourseBtn, body #content #display #createUserBtn {
 body #content #display #coursesArea {
   display: none;
 }
-body #content #display #coursesArea #coursesList {
+body #content #display #coursesList, body #content #display #userCoursesList {
   display: flex;
   flex-direction: column;
   justify-content: baseline;
   gap: 15px;
   padding: 30px;
 }
-body #content #display #coursesArea #coursesList .courseCard {
+body #content #display #coursesList .courseCard, body #content #display #userCoursesList .courseCard {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-body #content #display #coursesArea #coursesList .courseCard p:nth-child(n+3) {
+body #content #display #coursesList .courseCard p:nth-child(n+3), body #content #display #userCoursesList .courseCard p:nth-child(n+3) {
   grid-column: span 2;
 }
-body #content #display #coursesArea #coursesList .courseCard .courseSubject {
+body #content #display #coursesList .courseCard .courseSubject, body #content #display #userCoursesList .courseCard .courseSubject {
   font-size: 12px;
   font-weight: 700;
 }
-body #content #display #coursesArea #coursesList .courseCard .courseName {
+body #content #display #coursesList .courseCard .courseName, body #content #display #userCoursesList .courseCard .courseName {
   font-size: 18px;
   font-weight: 700;
 }
-body #content #display #coursesArea #coursesList .courseCard .courseDescription {
+body #content #display #coursesList .courseCard .courseDescription, body #content #display #userCoursesList .courseCard .courseDescription {
   font-size: 14px;
 }
-body #content #display #coursesArea #coursesList .courseCard .coursePrice {
+body #content #display #coursesList .courseCard .coursePrice, body #content #display #userCoursesList .courseCard .coursePrice {
   font-weight: 600;
 }
 body #content #display form {
@@ -232,6 +232,9 @@ body #content #display #usersArea #usersList .userCard .userCardInfoTitle {
 body #content #display #usersArea #usersList .userCard .cardBtnsContainer .deleteCardBtn, body #content #display #usersArea #usersList .userCard .cardBtnsContainer .editCardBtn {
   align-self: baseline;
   padding-top: 7px;
+}
+body #content #display #userCoursesList {
+  padding: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

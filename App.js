@@ -31,7 +31,6 @@ export class App {
         App.#database.saveUserChanges(userId, type, name, email, password, cpf, phone)
     }
 
-
     deleteUser(userId){
         App.#database.removeUserFromDatabase(userId)
     }
@@ -44,10 +43,6 @@ export class App {
         return App.#database.findUserById(userId)
     }
     
-    getTeachers() {
-        return App.#database.find('teachers')
-    }
-    
     createUserType(newUserType){
         App.#database.saveUserType(newUserType)
     }
@@ -58,6 +53,10 @@ export class App {
 
     addUser(userId, courseName) {
         App.#database.addUserToCourse(userId, courseName)
+    }
+
+    removeUser(userId, courseName) {
+        App.#database.removeUserFromCourse(userId, courseName)
     }
     
     createCourseSubject(newCourseSubject){

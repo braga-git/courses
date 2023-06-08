@@ -13,4 +13,9 @@ export class User {
     addToCourses(course) {
         this.courses.push(course)
     }
+
+    removeFromCourses(courseName){
+        const updatedCourses = this.courses.filter(course => course.name !== courseName);
+        this.courses = updatedCourses
+    }
 }

@@ -27,6 +27,10 @@ export class Database {
         }
     }
 
+    findCourseById(courseId) {
+        return this.#storage.courses.find(course => course.id === courseId)
+    }
+
     findCourseByName(courseName) {
         return this.#storage.courses.find(course => course.name === courseName)
     }
@@ -54,26 +58,24 @@ export class Database {
     saveUserChanges(userId, newType, newName, newEmail, newPassword, newCpf, newPhone) {
         const user = this.findUserById(userId)
 
-        // if (user.type !== newType) {
-        //     user.type = newType
-        // }
-        if (user?.name !== newName) {
+        if (user.type !== newType) {
+            user.type = newType
+        }
+        if (user.name !== newName) {
             user.name = newName
         }
-        // if (user.email !== newEmail) {
-        //     user.email = newEmail
-        // }
-        // if (user.password !== newPassword) {
-        //     user.password = newPassword
-        // }
-        // if (user.cpf !== newCpf) {
-        //     user.cpf = newCpf
-        // }
-        // if (user.phone !== newPhone) {
-        //     user.phone = newPhone
-        // }
-        
-        console.log(user)
+        if (user.email !== newEmail) {
+            user.email = newEmail
+        }
+        if (user.password !== newPassword) {
+            user.password = newPassword
+        }
+        if (user.cpf !== newCpf) {
+            user.cpf = newCpf
+        }
+        if (user.phone !== newPhone) {
+            user.phone = newPhone
+        }
     }
 
     saveUserType(newUserType) {
@@ -89,22 +91,23 @@ export class Database {
 
     removeUserFromDatabase(userId) {
         const users = this.#storage.users;
-        const updatedUsers = users.filter(user => user.id !== userId);
+        const updatedUsers = users.filter(user => user.id !== userId)
         this.#storage.users = updatedUsers
     }
 
     addUserToCourse(userId, courseName) {
         const user = this.findUserById(userId)
         const course = this.findCourseByName(courseName)
-
-        if (user?.type === 'Teacher') {
-            course?.addToTeachers(user)
-            user?.addToCourses(course)
-        } else {
-            course?.addToStudents(user)
-            user?.addToCourses(course)
-        }
+        
+        course?.addToUsers(user)
+        user?.addToCourses(course)
     }
 
-
+    removeUserFromCourse(userId, courseName) {
+        const user = this.findUserById(userId)
+        const course = this.#storage.courses.find(course => course.id === courseName)
+        
+        course?.removeFromUsers(userId)
+        user?.removeFromCourses(courseName)
+    }
 }

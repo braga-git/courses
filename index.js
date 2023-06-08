@@ -24,6 +24,7 @@ app.createUser("Student", "Luiza", "luiza@cap.com", "senhamestra123", "123.435.4
 let courses = app.getCourses()
 let users = app.getUsers()
 let userIdSelected
+
 const coursesSubjects = app.getCoursesSubjects()
 const usersTypes = app.getUsersTypes()
 
@@ -63,6 +64,7 @@ const editUserEmailInput = document.getElementById('editUserEmailInput')
 const editUserPasswordInput = document.getElementById('editUserPasswordInput')
 const editUserCPFInput = document.getElementById('editUserCPFInput')
 const editUserPhoneInput = document.getElementById('editUserPhoneInput')
+const userCoursesList = document.getElementById('userCoursesList')
 
 function showDisplayContent(element, displayStyle){
     for (let i = 0; i < display.children.length; i++) {
@@ -101,6 +103,10 @@ function createUserCardInfoDiv(titleContent, infoClass, infoContent){
     return div
 }
 function appendOptionToSelectList(array, select) {
+    while (select.lastChild) {
+        select.removeChild(select.lastChild);
+    }
+
     array.forEach((subject) => {
         const option = document.createElement('option')
         option.value = subject
@@ -109,6 +115,10 @@ function appendOptionToSelectList(array, select) {
     })
 }
 function appendUsersToSelectList(selectList, userType) {
+    while (selectList.lastChild) {
+        selectList.removeChild(selectList.lastChild);
+    }
+
     users.forEach((user) => {
         if (user.type === userType) {
             const option = document.createElement('option')
@@ -348,7 +358,6 @@ coursesListBtn.addEventListener('click', () => {
 
     showDisplayContent(coursesArea, "block")
     display.style.overflowY = "scroll"
-    console.log(courses)
 })
 createCourseBtn.addEventListener('click', () => {
     showDisplayContent(createCourseForm, "flex")
@@ -422,17 +431,58 @@ usersListBtn.addEventListener('click', () => {
         })
         
         editUserBtn.addEventListener('click', () => {
+            while (userCoursesList.lastChild) {
+                userCoursesList.removeChild(userCoursesList.lastChild);
+            }
+
             showDisplayContent(editUserForm, "flex")
             appendOptionToSelectList(usersTypes, editUserTypeSelect)
             
+            userIdSelected = user.id
             editUserTypeSelect.value = user.type
             editUserNameInput.value = user.name
             editUserEmailInput.value  = user.email
             editUserPasswordInput.value = user.password
             editUserCPFInput.value = user.cpf
             editUserPhoneInput.value = user.phone
+            
+            let userCourses = user.courses
 
-            userIdSelected = user.id
+            console.log(user.courses)
+
+            userCourses.forEach((course) => {
+
+                console.log(course.users)
+
+                const courseCard = document.createElement('div')
+                courseCard.classList = "card courseCard"
+                
+                const cardBtnsContainer = document.createElement('div')
+                cardBtnsContainer.className = "cardBtnsContainer"
+
+                const deleteCourseBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
+                cardBtnsContainer.append(deleteCourseBtn)
+
+                const courseName = createCardParagraphAndAppendClassName("courseName", course.name)
+                const courseDescription = createCardParagraphAndAppendClassName("courseDescription", course.description)
+                const courseSubject = createCardParagraphAndAppendClassName("courseSubject", course.subject)
+                const coursePrice = createCardParagraphAndAppendClassName("coursePrice", `R$${course.price}`)
+
+                courseCard.append(courseSubject, cardBtnsContainer, courseName, courseDescription, coursePrice)
+                userCoursesList.appendChild(courseCard)
+
+                deleteCourseBtn.addEventListener('click', () => {
+                    app.removeUser(userIdSelected, course.name)
+                    userCourses = user.courses
+                    userCoursesList.removeChild(courseCard)
+
+                    console.log(course.users)
+                })
+                
+            })
+
+        console.log(user.courses)
+
         })
     })
     showDisplayContent(usersArea, "block")
@@ -493,5 +543,4 @@ editUserForm.addEventListener('submit', (event) => {
     const userPhone = editUserPhoneInput.value
 
     app.editUser(userIdSelected, userType, userName, userEmail, userPassword, userCPF, userPhone)
-    console.log(userIdSelected)
 })
