@@ -297,8 +297,31 @@ body {
                 }
             }
 
-            #userCoursesList{
-                padding: 0;
+            #editUserArea {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                
+                *:nth-child(n+3){
+                    grid-column: span 2;
+                }
+                
+                #userInfo, #userCourses {
+                    border: 1px black;
+                    border-style: hidden hidden solid hidden;
+                }
+
+                #userInfo {
+                    border-style: hidden solid solid hidden;
+                }
+
+                #editUserForm{
+                    display: flex;
+                    
+                }
+                
+                #userCoursesList{
+                    padding: 0;
+                }
             }
         }
     }

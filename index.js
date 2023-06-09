@@ -57,6 +57,7 @@ const createUserCPFInput = document.getElementById('createUserCPFInput')
 const createUserPhoneInput = document.getElementById('createUserPhoneInput')
 const createUserConfirmation = document.getElementById('createUserConfirmation')
 
+const editUserArea = document.getElementById('editUserArea')
 const editUserForm = document.getElementById('editUserForm')
 const editUserTypeSelect = document.getElementById('editUserTypeSelect')
 const editUserNameInput = document.getElementById('editUserNameInput')
@@ -70,9 +71,9 @@ function showDisplayContent(element, displayStyle){
     for (let i = 0; i < display.children.length; i++) {
         const child = display.children[i];
         if (child === element) {
-          child.style.display = displayStyle;
+            child.style.display = displayStyle;
         } else {
-          child.style.display = "none";
+            child.style.display = "none";
         }
     }
 }
@@ -435,7 +436,7 @@ usersListBtn.addEventListener('click', () => {
                 userCoursesList.removeChild(userCoursesList.lastChild);
             }
 
-            showDisplayContent(editUserForm, "flex")
+            showDisplayContent(editUserArea, "grid")
             appendOptionToSelectList(usersTypes, editUserTypeSelect)
             
             userIdSelected = user.id
@@ -445,15 +446,9 @@ usersListBtn.addEventListener('click', () => {
             editUserPasswordInput.value = user.password
             editUserCPFInput.value = user.cpf
             editUserPhoneInput.value = user.phone
-            
             let userCourses = user.courses
-
-            console.log(user.courses)
-
+            
             userCourses.forEach((course) => {
-
-                console.log(course.users)
-
                 const courseCard = document.createElement('div')
                 courseCard.classList = "card courseCard"
                 
@@ -475,14 +470,8 @@ usersListBtn.addEventListener('click', () => {
                     app.removeUser(userIdSelected, course.name)
                     userCourses = user.courses
                     userCoursesList.removeChild(courseCard)
-
-                    console.log(course.users)
                 })
-                
-            })
-
-        console.log(user.courses)
-
+            })            
         })
     })
     showDisplayContent(usersArea, "block")

@@ -233,7 +233,24 @@ body #content #display #usersArea #usersList .userCard .cardBtnsContainer .delet
   align-self: baseline;
   padding-top: 7px;
 }
-body #content #display #userCoursesList {
+body #content #display #editUserArea {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+body #content #display #editUserArea *:nth-child(n+3) {
+  grid-column: span 2;
+}
+body #content #display #editUserArea #userInfo, body #content #display #editUserArea #userCourses {
+  border: 1px black;
+  border-style: hidden hidden solid hidden;
+}
+body #content #display #editUserArea #userInfo {
+  border-style: hidden solid solid hidden;
+}
+body #content #display #editUserArea #editUserForm {
+  display: flex;
+}
+body #content #display #editUserArea #userCoursesList {
   padding: 0;
 }
 

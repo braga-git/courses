@@ -125,52 +125,56 @@
                 <div id="createUserConfirmation" class="platformMessages">
                     <i class="fa-regular fa-thumbs-up fa-10x"></i>
                     <h1>User successfully created!</h1>
-                    <p>You have just created a new user for this platform. </p>
+                    <p>You have just created a new user for this platform.</p>
                     <span>Great job!</span>
                 </div>
 
-                <form id="editUserForm">
-                    <div class="formField">
-                        <label for="editUserTypeSelect">User type</label>
-                        <select name="editUserType" id="editUserTypeSelect"             class="userTypeSelect"></select>
-                        <div class="error"></div>
-                    </div>
-                    <div class="formField">
-                        <label for="editUserNameInput">Name</label>
-                        <input type="text" name="editUserName" id="editUserNameInput" class="userNameInput"
-                            autocomplete="off">
-                        <div class="error"></div>
-                    </div>
-                    <div class="formField">
-                        <label for="editUserEmailInput">Email</label>
-                        <input type="email" name="editUserEmail" id="editUserEmailInput" class="userEmailInput"
-                            autocomplete="off">
-                        <div class="error"></div>
-                    </div>
-                    <div class="formField">
-                        <label for="editUserPasswordInput">Password</label>
-                        <input type="password" name="editUserPassword" id="editUserPasswordInput"
-                            class="userPasswordInput" autocomplete="off">
-                        <div class="error"></div>
-                    </div>
-                    <div class="formField">
-                        <label for="editUserCPFInput">CPF</label>
-                        <input type="text" name="editUserCPF" id="editUserCPFInput" class="userCPFInput"
-                            autocomplete="off">
-                        <div class="error"></div>
-                    </div>
-                    <div class="formField">
-                        <label for="editUserPhoneInput">Phone</label>
-                        <input type="text" name="editUserPhone" id="editUserPhoneInput" class="userPhoneInput"
-                            autocomplete="off">
-                        <div class="error"></div>
-                    </div>
+                <div id="editUserArea">
+                    <button id="userInfo">User information</button>
+                    <button id="userCourses">Registered courses</button>
+                    <form id="editUserForm">
+                        <div class="formField">
+                            <label for="editUserTypeSelect">User type</label>
+                            <select name="editUserType" id="editUserTypeSelect" class="userTypeSelect"></select>
+                            <div class="error"></div>
+                        </div>
+                        <div class="formField">
+                            <label for="editUserNameInput">Name</label>
+                            <input type="text" name="editUserName" id="editUserNameInput" class="userNameInput"
+                                autocomplete="off">
+                            <div class="error"></div>
+                        </div>
+                        <div class="formField">
+                            <label for="editUserEmailInput">Email</label>
+                            <input type="email" name="editUserEmail" id="editUserEmailInput" class="userEmailInput"
+                                autocomplete="off">
+                            <div class="error"></div>
+                        </div>
+                        <div class="formField">
+                            <label for="editUserPasswordInput">Password</label>
+                            <input type="password" name="editUserPassword" id="editUserPasswordInput"
+                                class="userPasswordInput" autocomplete="off">
+                            <div class="error"></div>
+                        </div>
+                        <div class="formField">
+                            <label for="editUserCPFInput">CPF</label>
+                            <input type="text" name="editUserCPF" id="editUserCPFInput" class="userCPFInput"
+                                autocomplete="off">
+                            <div class="error"></div>
+                        </div>
+                        <div class="formField">
+                            <label for="editUserPhoneInput">Phone</label>
+                            <input type="text" name="editUserPhone" id="editUserPhoneInput" class="userPhoneInput"
+                                autocomplete="off">
+                            <div class="error"></div>
+                        </div>
+                        <button>Save changes</button>
+                    </form>
                     <div class="formField">
                         <label for="userCoursesList">Courses</label>
                         <div id="userCoursesList"></div>
                     </div>
-                    <button>Save changes</button>
-                </form>
+                </div>
 
             </div>
         </div>
