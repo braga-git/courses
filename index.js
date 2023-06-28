@@ -21,9 +21,12 @@ app.createUser("Teacher", "Douglas", "douglas@courses.com.br", "filosofianaveia"
 app.createUser("Teacher", "Matheus", "matheus@courses.com.br", "ambientalnaveia", "436.123.321-76", "(51) 9 9534-2987")
 app.createUser("Student", "Luiza", "luiza@cap.com", "senhamestra123", "123.435.443-43", "(51) 9 9214-3214")
 
+
 let courses = app.getCourses()
 let users = app.getUsers()
 let userIdSelected
+
+console.log(users)
 
 const coursesSubjects = app.getCoursesSubjects()
 const usersTypes = app.getUsersTypes()
@@ -58,6 +61,8 @@ const createUserPhoneInput = document.getElementById('createUserPhoneInput')
 const createUserConfirmation = document.getElementById('createUserConfirmation')
 
 const editUserArea = document.getElementById('editUserArea')
+const userInfoBtn = document.getElementById('userInfoBtn')
+const userCoursesBtn = document.getElementById('userCoursesBtn')
 const editUserForm = document.getElementById('editUserForm')
 const editUserTypeSelect = document.getElementById('editUserTypeSelect')
 const editUserNameInput = document.getElementById('editUserNameInput')
@@ -67,7 +72,7 @@ const editUserCPFInput = document.getElementById('editUserCPFInput')
 const editUserPhoneInput = document.getElementById('editUserPhoneInput')
 const userCoursesList = document.getElementById('userCoursesList')
 
-function showDisplayContent(element, displayStyle){
+function showDisplayContent(element, displayStyle) {
     for (let i = 0; i < display.children.length; i++) {
         const child = display.children[i];
         if (child === element) {
@@ -77,7 +82,7 @@ function showDisplayContent(element, displayStyle){
         }
     }
 }
-function createCardButton(classList){
+function createCardButton(classList) {
     const btn = document.createElement('button')
     const buttonIcon = document.createElement('i')
     btn.classList = classList
@@ -90,7 +95,7 @@ function createCardParagraphAndAppendClassName(className, textContent) {
     paragraph.textContent = textContent
     return paragraph
 }
-function createUserCardInfoDiv(titleContent, infoClass, infoContent){
+function createUserCardInfoDiv(titleContent, infoClass, infoContent) {
     const div = document.createElement('div')
     div.classList = "userCardInfoDiv"
     const title = document.createElement('p')
@@ -198,101 +203,101 @@ function validateCoursePrice() {
 
     return valid
 }
-function validateUserName() {
+function validateUserName(input) {
     let valid = false
     const namePattern = /^[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]+([a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF'\s-])*[a-zA-ZÀ-ÿ\u00C0-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]$/
 
-    const userName = createUserNameInput.value.trim()
+    const userName = input.value.trim()
 
     if (userName === '') {
-        setError(createUserNameInput, 'Cannot be blank!')
-    } else if(!namePattern.test(userName)){
-        setError(createUserNameInput, 'Name is not valid!')
+        setError(input, 'Cannot be blank!')
+    } else if (!namePattern.test(userName)) {
+        setError(input, 'Name is not valid!')
     } else {
-        setSuccess(createUserNameInput)
+        setSuccess(input)
         valid = true
     }
 
     return valid
 }
-function validateUserEmail(){
+function validateUserEmail(input) {
     let valid = false
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 
-    const userEmail = createUserEmailInput.value.trim()
+    const userEmail = input.value.trim()
 
     if (userEmail === '') {
-        setError(createUserEmailInput, 'Cannot be blank!')
-    } else if(!emailPattern.test(userEmail)){
-        setError(createUserEmailInput, 'Email is not valid!')
+        setError(input, 'Cannot be blank!')
+    } else if (!emailPattern.test(userEmail)) {
+        setError(input, 'Email is not valid!')
     } else {
-        setSuccess(createUserEmailInput)
+        setSuccess(input)
         valid = true
     }
 
     return valid
 }
-function validateUserPassword() {
+function validateUserPassword(input) {
     let valid = false
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
 
-    const userPassword = createUserPasswordInput.value.trim()
+    const userPassword = input.value.trim()
 
     if (userPassword === '') {
-        setError(createUserPasswordInput, 'Cannot be blank!')
-    } else if(!passwordPattern.test(userPassword)){
-        setError(createUserPasswordInput, 'Password is not valid!')
+        setError(input, 'Cannot be blank!')
+    } else if (!passwordPattern.test(userPassword)) {
+        setError(input, 'Password is not valid!')
     } else {
-        setSuccess(createUserPasswordInput)
+        setSuccess(input)
         valid = true
     }
 
     return valid
 }
-function validateUserCPF(){
+function validateUserCPF(input) {
     let valid = false
     const CPFPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
-    
-    const userCPF = createUserCPFInput.value.trim()
+
+    const userCPF = input.value.trim()
 
     if (userCPF === '') {
-        setError(createUserCPFInput, 'Cannot be blank!')
-    } else if(!CPFPattern.test(userCPF)){
-        setError(createUserCPFInput, 'CPF is not valid!')
+        setError(input, 'Cannot be blank!')
+    } else if (!CPFPattern.test(userCPF)) {
+        setError(input, 'CPF is not valid!')
     } else {
-        setSuccess(createUserCPFInput)
+        setSuccess(input)
         valid = true
     }
 
     return valid
 }
-function validateUserPhone(){
+function validateUserPhone(input) {
     let valid = false
     const PhonePattern = /^(\+55)?\s*(\()?(\d{2})?(\))?\s*([9])?\s*(\d{4})[-.\s]?(\d{4})$/
 
-    const userPhone = createUserPhoneInput.value
+    const userPhone = input.value
 
     if (userPhone === '') {
-        setError(createUserPhoneInput, 'Cannot be blank!')
-    } else if(!PhonePattern.test(userPhone)){
-        setError(createUserPhoneInput, 'Phone is not valid!')
+        setError(input, 'Cannot be blank!')
+    } else if (!PhonePattern.test(userPhone)) {
+        setError(input, 'Phone is not valid!')
     } else {
-        setSuccess(createUserPhoneInput)
+        setSuccess(input)
         valid = true
     }
 
     return valid
 }
-function validateInputs() {
+function validateInputs(userNameInput, userEmailInput, userPasswordInput, userCPFInput, userPhoneInput) {
     let isCourseNameValid = validateCourseName()
     let isCourseDescriptionValid = validateCourseDescription()
     let isCoursePriceValid = validateCoursePrice()
 
-    let isUserNameValid = validateUserName()
-    let isUserEmailValid = validateUserEmail()
-    let isUserPasswordValid = validateUserPassword()
-    let isUserCPFValid = validateUserCPF()
-    let isUserPhoneValid =  validateUserPhone()
+    let isUserNameValid = validateUserName(userNameInput)
+    let isUserEmailValid = validateUserEmail(userEmailInput)
+    let isUserPasswordValid = validateUserPassword(userPasswordInput)
+    let isUserCPFValid = validateUserCPF(userCPFInput)
+    let isUserPhoneValid = validateUserPhone(userPhoneInput)
 
     let isCourseFormValid = isCourseNameValid && isCourseDescriptionValid && isCoursePriceValid
     let isUserFormValid = isUserNameValid && isUserEmailValid && isUserPasswordValid && isUserCPFValid && isUserPhoneValid
@@ -334,7 +339,7 @@ coursesListBtn.addEventListener('click', () => {
     courses.forEach((course) => {
         const courseCard = document.createElement('div')
         courseCard.classList = "card courseCard"
-        
+
         const cardBtnsContainer = document.createElement('div')
         cardBtnsContainer.className = "cardBtnsContainer"
 
@@ -408,14 +413,14 @@ usersListBtn.addEventListener('click', () => {
     users.forEach((user) => {
         const userCard = document.createElement('div')
         userCard.className = "card userCard"
-        
+
         const cardBtnsContainer = document.createElement('div')
         cardBtnsContainer.className = "cardBtnsContainer"
-        
+
         const editUserBtn = createCardButton("editCardBtn fa-sharp fa-solid fa-pen-to-square fa-2xs")
         const deleteUserBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
         cardBtnsContainer.append(editUserBtn, deleteUserBtn)
-        
+
         const userType = createUserCardInfoDiv("Type", "userType", user.type)
         const userName = createUserCardInfoDiv("Name", "userName", user.name)
         const userEmail = createUserCardInfoDiv("Email", "userEmail", user.email)
@@ -424,54 +429,73 @@ usersListBtn.addEventListener('click', () => {
 
         userCard.append(userType, cardBtnsContainer, userName, userCPF, userEmail, userPhone)
         usersList.appendChild(userCard)
-        
+
         deleteUserBtn.addEventListener('click', () => {
             app.deleteUser(user.id)
             users = app.getUsers()
             usersList.removeChild(userCard)
+            console.log(users)
         })
-        
-        editUserBtn.addEventListener('click', () => {
-            while (userCoursesList.lastChild) {
-                userCoursesList.removeChild(userCoursesList.lastChild);
-            }
 
+        editUserBtn.addEventListener('click', () => {
             showDisplayContent(editUserArea, "grid")
             appendOptionToSelectList(usersTypes, editUserTypeSelect)
-            
+            userCoursesBtn.classList.remove('pageButtonSelected')
+            userInfoBtn.classList.add('pageButtonSelected')
+            userCoursesList.style.display = 'none'
+            editUserForm.style.display = 'flex'
+
+            userCoursesBtn.addEventListener('click', () => {
+                userInfoBtn.classList.remove('pageButtonSelected')
+                userCoursesBtn.classList.add('pageButtonSelected')
+                editUserForm.style.display = 'none'
+                userCoursesList.style.display = 'flex'
+
+                while (userCoursesList.lastChild) {
+                    userCoursesList.removeChild(userCoursesList.lastChild);
+                }
+                let userCourses = user.courses
+                userCourses.forEach((course) => {
+                    const courseCard = document.createElement('div')
+                    courseCard.classList = "card courseCard"
+
+                    const cardBtnsContainer = document.createElement('div')
+                    cardBtnsContainer.className = "cardBtnsContainer"
+
+                    const deleteCourseBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
+                    cardBtnsContainer.append(deleteCourseBtn)
+
+                    const courseName = createCardParagraphAndAppendClassName("courseName", course.name)
+                    const courseDescription = createCardParagraphAndAppendClassName("courseDescription", course.description)
+                    const courseSubject = createCardParagraphAndAppendClassName("courseSubject", course.subject)
+                    const coursePrice = createCardParagraphAndAppendClassName("coursePrice", `R$${course.price}`)
+
+                    courseCard.append(courseSubject, cardBtnsContainer, courseName, courseDescription, coursePrice)
+                    userCoursesList.appendChild(courseCard)
+
+                    deleteCourseBtn.addEventListener('click', () => {
+                        app.removeUser(userIdSelected, course.name)
+                        userCourses = user.courses
+                        userCoursesList.removeChild(courseCard)
+                    })
+                })
+            })
+
+            userInfoBtn.addEventListener('click', () => {
+                userCoursesBtn.classList.remove('pageButtonSelected')
+                userInfoBtn.classList.add('pageButtonSelected')
+                userCoursesList.style.display = 'none'
+                editUserForm.style.display = 'flex'
+
+            })
+
             userIdSelected = user.id
             editUserTypeSelect.value = user.type
             editUserNameInput.value = user.name
-            editUserEmailInput.value  = user.email
+            editUserEmailInput.value = user.email
             editUserPasswordInput.value = user.password
             editUserCPFInput.value = user.cpf
             editUserPhoneInput.value = user.phone
-            let userCourses = user.courses
-            
-            userCourses.forEach((course) => {
-                const courseCard = document.createElement('div')
-                courseCard.classList = "card courseCard"
-                
-                const cardBtnsContainer = document.createElement('div')
-                cardBtnsContainer.className = "cardBtnsContainer"
-
-                const deleteCourseBtn = createCardButton("deleteCardBtn fa-regular fa-trash fa-2xs")
-                cardBtnsContainer.append(deleteCourseBtn)
-
-                const courseName = createCardParagraphAndAppendClassName("courseName", course.name)
-                const courseDescription = createCardParagraphAndAppendClassName("courseDescription", course.description)
-                const courseSubject = createCardParagraphAndAppendClassName("courseSubject", course.subject)
-                const coursePrice = createCardParagraphAndAppendClassName("coursePrice", `R$${course.price}`)
-
-                courseCard.append(courseSubject, cardBtnsContainer, courseName, courseDescription, coursePrice)
-                userCoursesList.appendChild(courseCard)
-
-                deleteCourseBtn.addEventListener('click', () => {
-                    app.removeUser(userIdSelected, course.name)
-                    userCourses = user.courses
-                    userCoursesList.removeChild(courseCard)
-                })
-            })            
         })
     })
     showDisplayContent(usersArea, "block")
@@ -493,7 +517,7 @@ createUserForm.addEventListener('submit', (event) => {
     const userCPF = createUserCPFInput.value
     const userPhone = createUserPhoneInput.value
 
-    if(validateInputs()){
+    if (validateInputs(createUserNameInput, createUserEmailInput, createUserPasswordInput, createUserCPFInput, createUserPhoneInput)) {
         app.createUser(userType, userName, userEmail, userPassword, userCPF, userPhone)
 
         createUserForm.style.display = "none"
@@ -504,26 +528,26 @@ createUserForm.addEventListener('submit', (event) => {
 createUserForm.addEventListener('input', debouce((event) => {
     switch (event.target.className) {
         case 'userNameInput':
-            validateUserName()
+            validateUserName(createUserNameInput)
             break
         case 'userEmailInput':
-            validateUserEmail()
+            validateUserEmail(createUserEmailInput)
             break
         case 'userPasswordInput':
-            validateUserPassword()
+            validateUserPassword(createUserPasswordInput)
             break
         case 'userCPFInput':
-            validateUserCPF()
+            validateUserCPF(createUserCPFInput)
             break
         case 'userPhoneInput':
-            validateUserPhone()
+            validateUserPhone(createUserPhoneInput)
             break
     }
 }))
 
 editUserForm.addEventListener('submit', (event) => {
     event.preventDefault()
-    
+
     const userType = editUserTypeSelect.value
     const userName = editUserNameInput.value
     const userEmail = editUserEmailInput.value
@@ -531,5 +555,26 @@ editUserForm.addEventListener('submit', (event) => {
     const userCPF = editUserCPFInput.value
     const userPhone = editUserPhoneInput.value
 
-    app.editUser(userIdSelected, userType, userName, userEmail, userPassword, userCPF, userPhone)
+    if (validateInputs(editUserNameInput, editUserEmailInput, editUserPasswordInput, editUserCPFInput, editUserPhoneInput)){ 
+        app.editUser(userIdSelected, userType, userName, userEmail, userPassword, userCPF, userPhone)
+    }
 })
+editUserForm.addEventListener('input', debouce((event) => {
+    switch (event.target.className) {
+        case 'userNameInput':
+            validateUserName(editUserNameInput)
+            break
+        case 'userEmailInput':
+            validateUserEmail(editUserEmailInput)
+            break
+        case 'userPasswordInput':
+            validateUserPassword(editUserPasswordInput)
+            break
+        case 'userCPFInput':
+            validateUserCPF(editUserCPFInput)
+            break
+        case 'userPhoneInput':
+            validateUserPhone(editUserPhoneInput)
+            break
+    }
+}))
